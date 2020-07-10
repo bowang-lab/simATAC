@@ -276,7 +276,6 @@ simATACSimBinMean <- function(object, sim) {
 }
 
 
-
 #' Adjust the simulated library size and bin means to generate final counts
 #' using Poisson distribution, with optional Gaussian noise.
 #'
