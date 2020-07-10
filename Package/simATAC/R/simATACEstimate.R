@@ -35,7 +35,6 @@ simATACEstimate.SingleCellExperiment <- function(count, object = newsimATACCount
 }
 
 
-
 #' @rdname simATACEstimate
 #' @importFrom stats median
 #' @importFrom utils write.table
@@ -70,7 +69,6 @@ simATACEstimate.dgCMatrix <- function(count, object = newsimATACCount(), verbose
 
   return(object)
 }
-
 
 
 #' Estimate library size parameters
@@ -136,7 +134,6 @@ simATACEstNonZeroPro <- function(count, object) {
 
   return(object)
 }
-
 
 
 #' Estimate bin coverage mean
