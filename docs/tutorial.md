@@ -27,6 +27,82 @@ We defined a simATACCount class, which is an class specifically desinged for sto
 ```bash
 $ object <- newsimATACCount()
 ```
-and print its parameters:
+and print the description for its parameters:
+
+```bash
+$ ?simATACCount
+```
+
+```bash
+simATACCount              package:simATAC              R Documentation
+
+The simATACCount class
+
+Description:
+
+     S4 class that holds parameters for the count matrix of simATAC
+     simulation.
+
+Parameters:
+
+     simATAC simulation parameters:
+
+     ‘nBins’ The bin number to simulate.
+
+     ‘nCells’ The cell number to simulate.
+
+     ‘[seed]’ Seed to use for generating random numbers.
+
+     ‘[default]’ The logical variable whether to use default parameters
+          (TRUE) or learn from data (FALSE)
+
+     ‘[species]’ The string indicating the species of the input cells
+
+     _Library size parameters_
+
+          ‘lib.mean1’ Mean parameter for the first component of library
+              size bimodal Gaussian distribution.
+
+          ‘lib.mean2’ Mean parameter for the second component of
+              library size bimodal Gaussian distribution
+
+          ‘lib.sd1’ Standard deviation parameter for the first
+              component of library size bimodal Gaussian distribution.
+
+          ‘lib.sd2’ Standard deviation parameter for the second
+              component of library size bimodal Gaussian distribution.
+
+          ‘lib.prob’ Probability parameter for the first component in
+              bimodal Gaussian distribution. The probability for the
+              second component is 1-lib.prob.
+
+     _Zero entry parameters_
+
+          ‘non.zero.pro’ The proportion of non-zero cells per bin in
+              the original count matrix
+
+          ‘mean.coef0’ Estimated coefficient of power zero variable in
+              the polynomial function
+
+          ‘mean.coef1’ Estimated coefficient of power one variable in
+              the polynomial function
+
+          ‘mean.coef2’ Estimated coefficient of power two variable in
+              the polynomial function
+
+     _[noise]_
+
+          ‘[noise.mean]’ Gaussian mean to be added as noise to the
+              final simulated counts
+
+          ‘[noise.sd]’ Gaussian standard deviation to be added as noise
+              to the final simulated counts
+
+     The parameters not shown in brackets can be estimated from real
+     data using ‘simATACEstimate’. For details of the simATAC
+     simulation see ‘simATACSimulate’.
+```
+
+
 
 
