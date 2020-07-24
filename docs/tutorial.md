@@ -6,6 +6,7 @@ Assuming there is scATAC-seq dataset with a sepcific cell type, you can convert 
 
 ## Table of Contents
 
+- [Loading simATAC](#load)
 - [simATACCount class](#simATACCount)
 - [Estimation function](#estimation)
 - [Simulation function](#simulation)
@@ -13,10 +14,19 @@ Assuming there is scATAC-seq dataset with a sepcific cell type, you can convert 
 - [Get parameters](#get)
 
 
-<a name="simATACCount"></a>**simATACCount class**        
-
+<a name="simATACCount"></a>**Loading simATAC**        
+We need to load simATAC R package to be able to use the provided functions.
 
 ```bash
-$ wget http://renlab.sdsc.edu/r3fang/share/github/Mouse_Brain_10X/atac_v1_adult_brain_fresh_5k.snap
-$ http://renlab.sdsc.edu/r3fang/share/github/Mouse_Brain_10X/atac_v1_adult_brain_fresh_5k_singlecell.csv
+$ library(simATAC)
 ```
+
+<a name="simATACCount"></a>**simATACCount class**        
+We defined a simATACCount class, which is an class specifically desinged for storing simATAC scATAC-seq simulation parameters. You can create a new simATACCount object by:
+
+```bash
+$ object <- newsimATACCount()
+```
+and print its parameters:
+
+
