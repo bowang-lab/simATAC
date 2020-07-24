@@ -18,7 +18,7 @@ desired genomic regions in BED file.
 
 ## Getting started
 
-We provided simATAC tutorial with examples and explanations about its functions and how to use them. This is a detailed document that introduces the main features of simATAC.
+We created a simATAC tutorial with examples and explanations about the provided functions and how to use them. This is a detailed document that introduces the main features of simATAC.
 
 
 
