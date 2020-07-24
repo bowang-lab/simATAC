@@ -18,7 +18,10 @@ desired genomic regions in BED file.
 
 ## Getting started
 
+
 We created a simATAC tutorial with examples and explanations about the provided functions and how to use them. This is a detailed document that introduces the main features of simATAC.
+* [simATAC tutorial](https://github.com/r3fang/SnapATAC/wiki/FAQs#10X_snap)
+
 
 
 
