@@ -7,8 +7,8 @@ Assuming there is scATAC-seq dataset with a sepcific cell type, you can convert 
 ## Table of Contents
 
 - [simATACCount class](#simATACCount)
-- [Estimation step](#estimation)
-- [Simulation step](#simulation)
+- [Estimation function](#estimation)
+- [Simulation function](#simulation)
 - [Set parameters](#set)
 - [Get parameters](#get)
 
