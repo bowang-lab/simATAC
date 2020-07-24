@@ -14,7 +14,7 @@ Assuming there is scATAC-seq dataset with a sepcific cell type, you can convert 
 - [Get parameters](#get)
 
 
-<a name="simATACCount"></a>**Loading simATAC**        
+<a name="load"></a>**Loading simATAC**        
 We need to load simATAC R package to be able to use the provided functions.
 
 ```bash
@@ -67,13 +67,13 @@ Slot "non.zero.pro":
 [1] 1
 
 Slot "mean.coef0":
-[1] -0.1182035
+[1] 0.002822035
 
 Slot "mean.coef1":
-[1] 10.34774
+[1] 0.6218985
 
 Slot "mean.coef2":
-[1] -79.09698
+[1] 1.976122
 
 Slot "noise.mean":
 [1] 0
@@ -176,10 +176,87 @@ simATAC allows you to estimate the parameters of the parameters' models by simAT
 ```
 count object includes 288 cells, and 642098 bins with 5000 base pair length. It is a sparse matrix abnd you can print the type of it by running
 ```bash
+> typeof(count)
+[1] "S4"
 > class(count)
 [1] "dgCMatrix"
 attr(,"package")
 [1] "Matrix"
 ```
+
+Because the ocunt object is cell by bin (rows are cells and columns are bins), you need to convert it to the bin by cell to be able to feed it into simATAC package.
+
+```bash
+library(Matrix)
+
+> object <- simATACEstimate(t(count))
+simATAC is:
+...Estimating library size...
+...Estimating non-zero cell proportion...
+...Estimating bin mean...
+>
+> object
+An object of class "simATACCount"
+Slot "nBins":
+[1] 642098
+
+Slot "nCells":
+[1] 500
+
+Slot "seed":
+[1] 425649
+
+Slot "default":
+[1] FALSE
+
+Slot "species":
+[1] "human"
+
+Slot "lib.mean1":
+[1] 13.6052
+
+Slot "lib.mean2":
+[1] 14.93831
+
+Slot "lib.sd1":
+[1] 1.745244
+
+Slot "lib.sd2":
+[1] 1.009877
+
+Slot "lib.prob":
+[1] 0.5257947
+
+Slot "non.zero.pro":
+    [1] 0.000000000 0.000000000 0.003472222 0.006944444 0.000000000 0.003472222
+    [7] 0.003472222 0.000000000 0.000000000 0.000000000 0.006944444 0.003472222
+   [13] 0.000000000 0.000000000 0.003472222 0.006944444 0.000000000 0.000000000
+    [ reached getOption("max.print") -- omitted 642080 entries ]
+    
+Slot "mean.coef0":
+[1] 0.002822035
+
+Slot "mean.coef1":
+[1] 0.6218985
+
+Slot "mean.coef2":
+[1] 1.976122
+
+Slot "noise.mean":
+[1] 0
+
+Slot "noise.sd":
+[1] 0
+```
+
+simATACEstimate function estimates the paramters of fitted models and if the verbose vairable is set to TRUE (which is by default), it prints the progress of estimation process. 
+1. simATAC first fits a Guassian mixture model to the log-transformed of library size.
+1. It then calculates the proportion of cell having non-zero count whitin each bin (non-zero cell proportion).
+1. Finally fits a polynomial regression model to the relation between bin means and bin non zero cell proportions and estiamtes the parameters of the polynomial function.
+
+All estimated model parameters are stored in the simATACCount object. 
+
+The default values of the bin (nBins parameter) is associated with the number of bins for human species, which depends on the length of the genome. nBins varies for different species, and will be set based on the input count matrix when running the simulation function. 
+
 
 
