@@ -18,19 +18,76 @@ Assuming there is scATAC-seq dataset with a sepcific cell type, you can convert 
 We need to load simATAC R package to be able to use the provided functions.
 
 ```bash
-$ library(simATAC)
+> library(simATAC)
 ```
 
 <a name="simATACCount"></a>**simATACCount class**        
 We defined a simATACCount class, which is an class specifically desinged for storing simATAC scATAC-seq simulation parameters. You can create a new simATACCount object by:
 
 ```bash
-$ object <- newsimATACCount()
+> object <- newsimATACCount()
+> object
 ```
-and print the description for its parameters:
+
+which will print the default values for its parameters:
 
 ```bash
-$ ?simATACCount
+An object of class "simATACCount"
+Slot "nBins":
+[1] 642098
+
+Slot "nCells":
+[1] 500
+
+Slot "seed":
+[1] 425649
+
+Slot "default":
+[1] TRUE
+
+Slot "species":
+[1] "human"
+
+Slot "lib.mean1":
+[1] 13.60503
+
+Slot "lib.mean2":
+[1] 14.93826
+
+Slot "lib.sd1":
+[1] 1.745264
+
+Slot "lib.sd2":
+[1] 1.009923
+
+Slot "lib.prob":
+[1] 0.5257138
+
+Slot "non.zero.pro":
+[1] 1
+
+Slot "mean.coef0":
+[1] -0.1182035
+
+Slot "mean.coef1":
+[1] 10.34774
+
+Slot "mean.coef2":
+[1] -79.09698
+
+Slot "noise.mean":
+[1] 0
+
+Slot "noise.sd":
+[1] 0
+and print the description for its parameters:
+
+```
+
+You can print the description for each parameter by running
+
+```bash
+> ?simATACCount
 ```
 
 ```bash
@@ -103,6 +160,8 @@ Parameters:
      simulation see ‘simATACSimulate’.
 ```
 
+
+<a name="estimation"></a>**Estimation function**
 
 
 
