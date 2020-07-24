@@ -184,7 +184,7 @@ attr(,"package")
 [1] "Matrix"
 ```
 
-Because the ocunt object is cell by bin (rows are cells and columns are bins), you need to convert it to the bin by cell to be able to feed it into simATAC package.
+Because the count object is cell by bin (rows are cells and columns are bins), you need to convert it to the bin by cell to be able to feed it into simATAC package.
 
 ```bash
 library(Matrix)
@@ -250,13 +250,29 @@ Slot "noise.sd":
 ```
 
 simATACEstimate function estimates the paramters of fitted models and if the verbose vairable is set to TRUE (which is by default), it prints the progress of estimation process. 
-1. simATAC first fits a Guassian mixture model to the log-transformed of library size.
-1. It then calculates the proportion of cell having non-zero count whitin each bin (non-zero cell proportion).
-1. Finally fits a polynomial regression model to the relation between bin means and bin non zero cell proportions and estiamtes the parameters of the polynomial function.
+1. Library size parameters are estimated by fitting a Guassian mixture model to the log-transformed of library size.
+2. The proportion of cells having a non-zero count whitin each bin is calculated from the input count matrix (non-zero cell proportion).
+3. The polynomial regression function parameters are estimated by fittin a quadratic function to the relationship between bin means and bin non-zero cell proportions.
 
 All estimated model parameters are stored in the simATACCount object. 
 
-The default values of the bin (nBins parameter) is associated with the number of bins for human species, which depends on the length of the genome. nBins varies for different species, and will be set based on the input count matrix when running the simulation function. 
+The default values of the bin (nBins parameter) is associated with the number of bins for human species, which depends on the length of the genome. nBins varies for different species, and will be adjusted based on the input count matrix when running the simulation function. 
 
 
+
+<a name="simulation"></a>**Simulation function**
+
+You can simulate a synthetic count matrix by having the estimated models. The number of cells to be simulated can be manually adjusted.
+
+```bash
+> sim <- simATACSimulate(object, nCells = 1000)
+simATAC is:
+...Updating parameters...
+...Setting up SingleCellExperiment object...
+...Simulating library size...
+...Simulating non-zero cell proportion...
+...Simulating bin mean...
+...Generating final counts...
+...Done...
+```
 
