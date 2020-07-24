@@ -276,3 +276,58 @@ simATAC is:
 ...Done...
 ```
 
+```bash
+> sim
+class: SingleCellExperiment 
+dim: 642098 1000 
+metadata(1): Params
+assays(1): counts
+rownames(642098): chr1:1-5000 chr1:5001-10000 ...
+  chrun_ki270392v1:1-5000 chrun_ki270394v1:1-5000
+rowData names(2): Bin BinMean
+colnames(1000): Cell1 Cell2 ... Cell999 Cell1000
+colData names(2): Cell LibSize
+reducedDimNames(0):
+spikeNames(0):
+altExpNames(0):
+```
+
+The simATACSimulate() function returns a sim object, which is a SingleCellExperiment object with 1000 cells in columns and 642098 bins stored in rows. Both real and simulated scATAC-seq count matrices are sparse with a large number of zero counts. Cell names indicates the index of cells and bin names are associated with the positional information of the bins, including chromosome, starting bin postision, and ending bin position.
+
+```bash
+> library(SingleCellExperiment)
+> counts(sim)[1:5, 1:5]
+5 x 5 sparse Matrix of class "dgCMatrix"
+                 Cell1 Cell2 Cell3 Cell4 Cell5
+chr1:1-5000          .     .     .     .     .
+chr1:5001-10000      .     .     .     .     .
+chr1:10001-15000     .     .     .     .     .
+chr1:15001-20000     .     .     .     .     .
+chr1:20001-25000     .     .     .     .     .
+```
+
+you can also get the bin names and estimated means that are directly obtained from the polynomial function prediction via rowData function from SingleCellExperiment package. Cells' names and library sizes directly sampled from the Guassian mixture model are also provided via colData function. Emphasis that the BinMean and LibSize vaiables reported by colData and rowData are not the final simulated matrix parameters, and as explained they are the intermediary variables in the simulation process. 
+
+```bash
+> head(rowData(sim))
+DataFrame with 6 rows and 2 columns
+                              Bin             BinMean
+                         <factor>           <numeric>
+chr1:1-5000           chr1:1-5000 0.00282203544478947
+chr1:5001-10000   chr1:5001-10000 0.00282203544478947
+chr1:10001-15000 chr1:10001-15000 0.00407373696595591
+chr1:15001-20000 chr1:15001-20000 0.00727215505384173
+chr1:20001-25000 chr1:20001-25000 0.00282203544478947
+chr1:25001-30000 chr1:25001-30000 0.00470551609382224
+> head(colData(sim))
+DataFrame with 6 rows and 2 columns
+          Cell          LibSize
+      <factor>        <numeric>
+Cell1    Cell1 59456.8285774859
+Cell2    Cell2 8431.56960395614
+Cell3    Cell3 172995.376312487
+Cell4    Cell4 68915.5581219072
+Cell5    Cell5 22508.6642767295
+Cell6    Cell6  43532.364826085
+> 
+```
