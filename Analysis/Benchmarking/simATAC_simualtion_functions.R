@@ -17,7 +17,15 @@ simulate <- function(my.x.sp, mean, sd, species){
   object <- simATAC::simATACEstimate(t(my.x.sp@bmat))
   x <- toc()
   write(paste(as.character(nrow(my.x.sp@bmat)), x$toc-x$tic, sep = "     "), file = "Results/simATAC_estimation_time.txt", append = TRUE)
-
+  write(paste(as.character(nrow(my.x.sp@bmat)),
+              get(object, "lib.mean1"),
+              get(object, "lib.sd1"),
+              get(object, "lib.prob"),
+              get(object, "lib.mean2"),
+              get(object, "lib.sd2"),
+              get(object, "mean.coef0"),
+              get(object, "mean.coef1"),
+              get(object, "mean.coef2"), sep = "    "), file = "Results/simATAC_default_parameters.txt", append = TRUE)
   object <- simATAC::setParameters(object,
                           nCells = nrow(my.x.sp@bmat),
                           species = species,

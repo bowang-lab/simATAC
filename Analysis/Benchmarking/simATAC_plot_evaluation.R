@@ -1,6 +1,8 @@
 library(ggplot2)
 library(ggpubr)
 library(Matrix)
+library(GenomicRanges)
+library(SnapATAC)
 
 
 # This function gets original and simulated bin by cell sparse matrices as input and extracts main simulation
@@ -132,68 +134,68 @@ plotParams <- function(orig.count, sim.count, address, name, type, version){
               append = TRUE, sep = " ", col.names = FALSE, quote = FALSE, row.names = FALSE)
 
 
-  # orig.libsize.df <- data.frame(group = "Real", value = orig.libsize)
-  # sim.libsize.df <- data.frame(group = "Simulated", value = sim.libsize)
-  #
-  # # Plot box plot for original and simulated log transformed library sizes.
-  # df <- rbind(orig.libsize.df, sim.libsize.df)
-  # p <- ggboxplot(df, x = "group", y = "value",
-  #                color = "group", palette =c("#00AFBB", "#FC4E07"),
-  #                add = "jitter", shape = "group") +
-  #   ggtitle(plot.title) +
-  #   theme(
-  #     plot.title = element_text(size=24, face="bold.italic", hjust = 0.5),
-  #     axis.title.x = element_blank(),
-  #     axis.title.y = element_text(size=24, face="bold"),
-  #     axis.text.x = element_text(size = 24),
-  #     axis.text.y = element_text(size = 24)
-  #   ) + theme(legend.position = "none")
-  # # Save the plot in the given address
-  # png(paste(address, "/", name, "/", version, "/", name, "_", type, "_", version, "_LibSizeBoxP.png", sep = ""))
-  # print(p+ylab("log2(library size)"))
-  # dev.off()
-  #
-  #
-  # orig.bin.sparsity.df <- data.frame(group = "Real", value = orig.bin.sparsity)
-  # sim.bin.sparsity.df <- data.frame(group = "Simulated", value =sim.bin.sparsity)
-  #
-  # # Plot box plot for original and simulated bin sparsity (proportion of zero entries in each bin).
-  # df <- rbind(orig.bin.sparsity.df, sim.bin.sparsity.df)
-  # p <- ggboxplot(df, x = "group", y = "value",
-  #                color = "group", palette =c("red", "blue"),
-  #                add = "jitter", shape = "group") + ggtitle(plot.title) +
-  #   theme(
-  #     plot.title = element_text(size=24, face="bold.italic", hjust = 0.5),
-  #     axis.title.x = element_blank(),
-  #     axis.title.y = element_text(size=24, face="bold"),
-  #     axis.text.x = element_text(size = 24),
-  #     axis.text.y = element_text(size = 24)
-  #   ) + theme(legend.position = "none")
-  # # Save the plot in the given address
-  # png(paste(address, "/", name, "/", version, "/", name, "_", type, "_", version, "_BinSparsityBoxP.png", sep = ""))
-  # print(p+ylab("Bin sparsity")+ xlab(NULL))
-  # dev.off()
-  #
-  #
-  # orig.cell.sparsity.df <- data.frame(group = "Real", value = orig.cell.sparsity)
-  # sim.cell.sparsity.df <- data.frame(group = "Simulated", value =sim.cell.sparsity)
-  #
-  # # Plot box plot for original and simulated cell sparsity (proportion of zero entries in each cell).
-  # df <- rbind(orig.cell.sparsity.df, sim.cell.sparsity.df)
-  # p <- ggboxplot(df, x = "group", y = "value",
-  #                color = "group", palette =c("#CC79A7", "#009E73"),
-  #                add = "jitter", shape = "group") + ggtitle(plot.title) +
-  #   theme(
-  #     plot.title = element_text(size=24, face="bold.italic", hjust = 0.5),
-  #     axis.title.x = element_blank(),
-  #     axis.title.y = element_text(size=24, face="bold"),
-  #     axis.text.x = element_text(size = 24),
-  #     axis.text.y = element_text(size = 24)
-  #   ) + theme(legend.position = "none")
-  # # Save the plot in the given address
-  # png(paste(address, "/", name, "/", version, "/", name, "_", type, "_",  version, "_CellSparsityBoxP.png", sep = ""))
-  # print(p+ylab("Cell sparsity")+ xlab(NULL))
-  # dev.off()
+  orig.libsize.df <- data.frame(group = "Real", value = orig.libsize)
+  sim.libsize.df <- data.frame(group = "Simulated", value = sim.libsize)
+
+  # Plot box plot for original and simulated log transformed library sizes.
+  df <- rbind(orig.libsize.df, sim.libsize.df)
+  p <- ggboxplot(df, x = "group", y = "value",
+                 color = "group", palette =c("#00AFBB", "#FC4E07"),
+                 add = "jitter", shape = "group") +
+    ggtitle(plot.title) +
+    theme(
+      plot.title = element_text(size=24, face="bold.italic", hjust = 0.5),
+      axis.title.x = element_blank(),
+      axis.title.y = element_text(size=24, face="bold"),
+      axis.text.x = element_text(size = 24),
+      axis.text.y = element_text(size = 24)
+    ) + theme(legend.position = "none")
+  # Save the plot in the given address
+  png(paste(address, "/", name, "/", version, "/", name, "_", type, "_", version, "_LibSizeBoxP.png", sep = ""))
+  print(p+ylab("log2(library size)"))
+  dev.off()
+
+
+  orig.bin.sparsity.df <- data.frame(group = "Real", value = orig.bin.sparsity)
+  sim.bin.sparsity.df <- data.frame(group = "Simulated", value =sim.bin.sparsity)
+
+  # Plot box plot for original and simulated bin sparsity (proportion of zero entries in each bin).
+  df <- rbind(orig.bin.sparsity.df, sim.bin.sparsity.df)
+  p <- ggboxplot(df, x = "group", y = "value",
+                 color = "group", palette =c("red", "blue"),
+                 add = "jitter", shape = "group") + ggtitle(plot.title) +
+    theme(
+      plot.title = element_text(size=24, face="bold.italic", hjust = 0.5),
+      axis.title.x = element_blank(),
+      axis.title.y = element_text(size=24, face="bold"),
+      axis.text.x = element_text(size = 24),
+      axis.text.y = element_text(size = 24)
+    ) + theme(legend.position = "none")
+  # Save the plot in the given address
+  png(paste(address, "/", name, "/", version, "/", name, "_", type, "_", version, "_BinSparsityBoxP.png", sep = ""))
+  print(p+ylab("Bin sparsity")+ xlab(NULL))
+  dev.off()
+
+
+  orig.cell.sparsity.df <- data.frame(group = "Real", value = orig.cell.sparsity)
+  sim.cell.sparsity.df <- data.frame(group = "Simulated", value =sim.cell.sparsity)
+
+  # Plot box plot for original and simulated cell sparsity (proportion of zero entries in each cell).
+  df <- rbind(orig.cell.sparsity.df, sim.cell.sparsity.df)
+  p <- ggboxplot(df, x = "group", y = "value",
+                 color = "group", palette =c("#CC79A7", "#009E73"),
+                 add = "jitter", shape = "group") + ggtitle(plot.title) +
+    theme(
+      plot.title = element_text(size=24, face="bold.italic", hjust = 0.5),
+      axis.title.x = element_blank(),
+      axis.title.y = element_text(size=24, face="bold"),
+      axis.text.x = element_text(size = 24),
+      axis.text.y = element_text(size = 24)
+    ) + theme(legend.position = "none")
+  # Save the plot in the given address
+  png(paste(address, "/", name, "/", version, "/", name, "_", type, "_",  version, "_CellSparsityBoxP.png", sep = ""))
+  print(p+ylab("Cell sparsity")+ xlab(NULL))
+  dev.off()
 }
 
 
