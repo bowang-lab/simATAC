@@ -84,7 +84,7 @@ and print the description for its parameters:
 
 ```
 
-You can print the description for each parameter by running
+You can print the description for each parameter documented in the R package by running
 
 ```bash
 > ?simATACCount
@@ -163,5 +163,23 @@ Parameters:
 
 <a name="estimation"></a>**Estimation function**
 
+
+simATAC generates a synthetic scATAC-seq count matrix by first fitting statistical models to the three main parameters, including library size (read coverage of cells), bin mean (the average of counts per bin), and bin non-zero cell proportion (non-zero cell proportion in each bin). simATAC builds upon Gaussian mixture distribution to model cell library sizes, and polynomial regression model to represent the relationship between the bin means and the non-zero cell proportions of bins. 
+simATAC allows you to estimate the parameters of the parameters' models by simATACEstimate() function:
+
+```bash
+## return the cell by bin matrix from the snap file
+> count <- getCountFromh5("GSE99172.snap")
+## print dimentionality of the count matrix
+> dim(count)
+[1]    288 642098
+```
+count object includes 288 cells, and 642098 bins with 5000 base pair length. It is a sparse matrix abnd you can print the type of it by running
+```bash
+> class(count)
+[1] "dgCMatrix"
+attr(,"package")
+[1] "Matrix"
+```
 
 
