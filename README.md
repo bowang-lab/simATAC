@@ -15,6 +15,13 @@ desired genomic regions in BED file.
 
 ## Installation.
 
+Insttall simATAC R package: 
+
+```bash
+$ R
+> library(devtools)
+> install_github("bowang-lab/simATAC")
+```
 
 ## Getting started
 
