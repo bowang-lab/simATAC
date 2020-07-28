@@ -2,7 +2,9 @@ Welcome to the simATAC simulator!
 
 simATAC is an R package developed for simulating single-cell ATAC sequencing (scATAC-seq) count matrices. simATAC is an easy to use simulation framework that given a group of cells having similar biological characteristics in the format of a bin by cell matrix as input, it generates a synthetic bin by cell matrix resembling the real samples. simATAC mainly performs two estimation and simulation steps to generate final counts. simATAC provides the offer to convert the simulated bin by cell matrix into the binary version, peak by cell, and any list of regions (as features) by cell matrices. There are separate functions for each step, and this tutorial gives an overview and introduction to simATAC’s functionality.
 
-Assuming there is a scATAC-seq dataset with cells having similar biological characteristics (e.g. cell type), you can convert BAM files into a bin by cell (5 kbp window) matrix with any customized pipeline. We used Snaptools to generate .snap files which contain the bin by cell array. For running examples, we use the snap file of the [GSE99172](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE99172) real scATAC-seq sample. We will skip the snap generation (See [here](https://github.com/r3fang/SnapATAC/wiki/FAQs#whatissnap) for how to generate a snap file). Instead, we will download the snap file, which is provided in the example folder.
+Assuming there is a scATAC-seq dataset with cells having similar biological characteristics (e.g. cell type), you can convert BAM files into a bin by cell (5 kbp window) matrix with any customized pipeline. We used Snaptools to generate .snap files which contain the bin by cell array. For running examples, we use the snap file of the [GSE99172](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE99172) real scATAC-seq sample. We will skip the snap generation (See [here](https://github.com/r3fang/SnapATAC/wiki/FAQs#whatissnap) for how to generate a snap file). Instead, we will download the snap file, which is provided in the example folder. 
+
+GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type, and the generated bin by cell matrix (from snap file) contains cells having similar biological characteristics. You can generate the bin by cell matrix for multiple cell types; however, simATAC modelling is based on the assumption that input cells are similar biologically. You need to perform the simulation for each cell group separately.
 
 
 ## Table of Contents
@@ -16,23 +18,24 @@ Assuming there is a scATAC-seq dataset with cells having similar biological char
 
 
 <a name="load"></a>**Loading simATAC**        
-We need to load simATAC R package to be able to use the provided functions.
+You need to load the simATAC R package to be able to use it.
 
 ```bash
 > library(simATAC)
 ```
 
 <a name="simATACCount"></a>**simATACCount class**        
-We defined a simATACCount class, which is an class specifically desinged for storing simATAC scATAC-seq simulation parameters. You can create a new simATACCount object by:
+We defined a simATACCount class, which is a class specifically designed for storing simATAC scATAC-seq simulation parameters. You can create a new simATACCount object by:
 
 ```bash
 > object <- newsimATACCount()
-> object
 ```
 
-which will print the default values for its parameters:
+You can print the default values for the simATACCount object parameters (except the non.zero.pro parameter, which is a large list of bins' non-zero cell proportions and will be updated during the simulation step):
 
 ```bash
+> object
+
 An object of class "simATACCount"
 Slot "nBins":
 [1] 642098
@@ -85,13 +88,11 @@ and print the description for its parameters:
 
 ```
 
-You can print the description for each parameter documented in the R package by running
+You can print the description for each parameter documented in the simATAC R package by running
 
 ```bash
 > ?simATACCount
-```
 
-```bash
 simATACCount              package:simATAC              R Documentation
 
 The simATACCount class
