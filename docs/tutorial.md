@@ -179,7 +179,7 @@ To look at a particular parameter in the simATACCount object, we can run simATAC
 To return a list of parameters, we can use getParameters() function by giving a list of parameters in the input:
 
 ```bash
-> params <- getParameters(object, c(nCells, species, nBins))
+> params <- getParameters(object, c("nBins", "species", "nCells"))
 > params
 $nBins
 [1] 642098
