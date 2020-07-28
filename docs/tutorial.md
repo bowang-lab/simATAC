@@ -4,7 +4,7 @@ simATAC is an R package developed for simulating single-cell ATAC sequencing (sc
 
 Assuming there is a scATAC-seq dataset with cells having similar biological characteristics (e.g. cell type), you can convert BAM files into a bin by cell (5 kbp window) matrix with any customized pipeline. We used Snaptools to generate .snap files which contain the bin by cell array. For running examples, we use the snap file of the [GSE99172](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE99172) real scATAC-seq sample. We will skip the snap generation (See [here](https://github.com/r3fang/SnapATAC/wiki/FAQs#whatissnap) for how to generate a snap file). Instead, we will download the snap file, which is provided in the example folder. 
 
-GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type, and the generated bin by cell matrix (from snap file) contains cells having similar biological characteristics. You can generate the bin by cell matrix for multiple cell types; however, simATAC modelling is based on the assumption that input cells are similar biologically. You need to perform the simulation for each cell group separately.
+GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type, and the generated bin by cell matrix (from snap file) contains cells having similar biological characteristics. You can also create the bin by cell matrix for multiple cell types, based on your original dataset. However, simATAC modelling is based on the assumption that input cells are biologically similar. You need to perform the simulation for each cell group separately. Given the GSE99172 dataset, we use simATAC to simulate 1000 or more scATAC-seq cells by learning read distribution across cells and bins.
 
 
 ## Table of Contents
@@ -165,8 +165,8 @@ Parameters:
 
 <a name="estimation"></a>**Estimation function**
 
-
-simATAC generates a synthetic scATAC-seq count matrix by first fitting statistical models to the three main parameters, including library size (read coverage of cells), bin mean (the average of counts per bin), and bin non-zero cell proportion (non-zero cell proportion in each bin). simATAC builds upon Gaussian mixture distribution to model cell library sizes, and polynomial regression model to represent the relationship between the bin means and the non-zero cell proportions of bins. 
+For each user-input, simATAC performs two core simulation steps: (i) estimating the model parameters based on the input bin by cell matrix, including the library sizes of the cells, the non-zero cell proportions of each bin and the read average of each bin; (ii) generating a bin by cell matrix that resembles the original input scATAC-seq data by sampling from Gaussian mixture and polynomial models with the estimated parameters. simATAC outputs a count matrix as a [`SingleCellExperiment`][SCE] object from SingleCellExperiment package, offering additional functions to convert it to other types of feature matrices.
+ 
 simATAC allows you to estimate the parameters of the parameters' models by simATACEstimate() function:
 
 ```bash
@@ -333,3 +333,7 @@ Cell5    Cell5 22508.6642767295
 Cell6    Cell6  43532.364826085
 > 
 ```
+
+
+[scater]: https://github.com/davismcc/scater
+[SCE]: https://github.com/drisso/SingleCellExperiment
