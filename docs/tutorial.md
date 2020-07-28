@@ -1,7 +1,10 @@
-Welcome to simATAC simulator!
-simATAC is an R package developed for simualting single-cell ATAC sequencing (scATAC-seq) count matrices. simATAC is an easy to use simulation framework that given a group of cells having similar biological characteristics in the format of bin by cell matrix as an input, it generates a synthetic bin by cell matrix resembling the real samples. simATAC mainly performs two estimation and simualtion steps in order to generate final synthetic counts. There are separate functions for each step, and this tutorial gives an overview and introduction to simATAC’s functionality.
+Welcome to the simATAC simulator! 
 
-Assuming there is scATAC-seq dataset with a sepcific cell type, you can convert raw BAM files into a bin by cell (5kbp-window) matrix with any customized pipeline. We used Snaptools to generate .snap files which contains bin by cell array in it. In order to run examples, we use the snap file of GSE99172 real scATAC-seq sample. We will skip the snap generation (See [here](https://github.com/r3fang/SnapATAC/wiki/FAQs#whatissnap) for how to generate a snap file). Instead, we will download the snap file, which is provided in the example folder. 
+simATAC is an R package developed for simulating single-cell ATAC sequencing (scATAC-seq) count matrices. simATAC is an easy to use simulation framework that given a group of cells having similar biological characteristics in the format of a bin by cell matrix as input, it generates a synthetic bin by cell matrix resembling the real samples. simATAC mainly performs two estimation and simulation steps to generate final counts. simATAC provides the offer to convert the simulated bin by cell matrix into the binary version, peak by cell, and any list of regions (as features) by cell matrices. There are separate functions for each step, and this tutorial gives an overview and introduction to simATAC’s functionality.
+
+Assuming there is a scATAC-seq dataset with cells having similar biological characteristics (e.g. cell type), you can convert BAM files into a bin by cell (5 kbp window) matrix with any customized pipeline. We used Snaptools to generate .snap files which contain the bin by cell array. For running examples, we use the snap file of the [GSE99172](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE99172) real scATAC-seq sample. We will skip the snap generation (See [here](https://github.com/r3fang/SnapATAC/wiki/FAQs#whatissnap) for how to generate a snap file). Instead, we will download the snap file, which is provided in the example folder. 
+
+GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type, and the generated bin by cell matrix (from snap file) contains cells having similar biological characteristics. You can also create the bin by cell matrix for multiple cell types, based on your original dataset. However, simATAC modelling is based on the assumption that input cells are biologically similar. You need to perform the simulation for each cell group separately. Given the GSE99172 dataset, we use simATAC to simulate 1000 or more scATAC-seq cells by learning read distribution across cells and bins.
 
 
 ## Table of Contents
@@ -15,23 +18,24 @@ Assuming there is scATAC-seq dataset with a sepcific cell type, you can convert 
 
 
 <a name="load"></a>**Loading simATAC**        
-We need to load simATAC R package to be able to use the provided functions.
+You need to load the simATAC R package to be able to use it.
 
 ```bash
 > library(simATAC)
 ```
 
 <a name="simATACCount"></a>**simATACCount class**        
-We defined a simATACCount class, which is an class specifically desinged for storing simATAC scATAC-seq simulation parameters. You can create a new simATACCount object by:
+We defined a simATACCount class, which is a class specifically designed for storing simATAC scATAC-seq simulation parameters. You can create a new simATACCount object by:
 
 ```bash
 > object <- newsimATACCount()
-> object
 ```
 
-which will print the default values for its parameters:
+You can print the default values for the simATACCount object parameters (except the non.zero.pro parameter, which is a large list of bins' non-zero cell proportions and will be updated during the simulation step):
 
 ```bash
+> object
+
 An object of class "simATACCount"
 Slot "nBins":
 [1] 642098
@@ -84,13 +88,11 @@ and print the description for its parameters:
 
 ```
 
-You can print the description for each parameter documented in the R package by running
+You can print the description for each parameter documented in the simATAC R package by running
 
 ```bash
 > ?simATACCount
-```
 
-```bash
 simATACCount              package:simATAC              R Documentation
 
 The simATACCount class
@@ -163,9 +165,9 @@ Parameters:
 
 <a name="estimation"></a>**Estimation function**
 
-
-simATAC generates a synthetic scATAC-seq count matrix by first fitting statistical models to the three main parameters, including library size (read coverage of cells), bin mean (the average of counts per bin), and bin non-zero cell proportion (non-zero cell proportion in each bin). simATAC builds upon Gaussian mixture distribution to model cell library sizes, and polynomial regression model to represent the relationship between the bin means and the non-zero cell proportions of bins. 
-simATAC allows you to estimate the parameters of the parameters' models by simATACEstimate() function:
+For each user-input, simATAC performs two core simulation steps: (i) estimating the model parameters based on the input bin by cell matrix, including the library sizes of the cells, the non-zero cell proportions of each bin and the read average of each bin; (ii) generating a bin by cell matrix that resembles the original input scATAC-seq data by sampling from Gaussian mixture and polynomial models with the estimated parameters. simATAC outputs a count matrix as a [`SingleCellExperiment`][SCE] object from SingleCellExperiment package, offering additional functions to convert it to other types of feature matrices.
+ 
+simATAC allows you to estimate the parameters of the parameters' models by simATACEstimate() function. simATAC provides getCountFromh5() function, which is specifically implemented for reading the sparse bin by cell matrix given a snap file as input. 
 
 ```bash
 ## return the cell by bin matrix from the snap file
@@ -174,7 +176,8 @@ simATAC allows you to estimate the parameters of the parameters' models by simAT
 > dim(count)
 [1]    288 642098
 ```
-count object includes 288 cells, and 642098 bins with 5000 base pair length. It is a sparse matrix abnd you can print the type of it by running
+The count object is a sparse matrix containing 288 cells, and 642098 bins with 5000 base-pair lengths. See the type of the count object by running
+
 ```bash
 > typeof(count)
 [1] "S4"
@@ -184,10 +187,10 @@ attr(,"package")
 [1] "Matrix"
 ```
 
-Because the count object is cell by bin (rows are cells and columns are bins), you need to convert it to the bin by cell to be able to feed it into simATAC package.
+The count object is a sparse cell by bin matrix (which is directly extracted from snap file), you need to convert it to a bin by cell matrix to be able to feed it into simATAC package.
 
 ```bash
-library(Matrix)
+> library(Matrix)
 
 > object <- simATACEstimate(t(count))
 simATAC is:
@@ -249,20 +252,18 @@ Slot "noise.sd":
 [1] 0
 ```
 
-simATACEstimate function estimates the paramters of fitted models and if the verbose vairable is set to TRUE (which is by default), it prints the progress of estimation process. 
-1. Library size parameters are estimated by fitting a Guassian mixture model to the log-transformed of library size.
-2. The proportion of cells having a non-zero count whitin each bin is calculated from the input count matrix (non-zero cell proportion).
-3. The polynomial regression function parameters are estimated by fittin a quadratic function to the relationship between bin means and bin non-zero cell proportions.
+simATACEstimate function estimates the models' parameters, and if the verbose variable is TRUE (default value), it prints the progress of the estimation process. 
+1. Library size parameters are estimated by fitting a Gaussian mixture model to the log-transformed of library size.
+2. The proportion of cells having a non-zero count within each bin is calculated from the input count matrix (non-zero cell proportion).
+3. The polynomial regression function parameters are estimated by fitting a quadratic function to the relationship between bin means and bin non-zero cell proportions.
 
 All estimated model parameters are stored in the simATACCount object. 
 
-The default values of the bin (nBins parameter) is associated with the number of bins for human species, which depends on the length of the genome. nBins varies for different species, and will be adjusted based on the input count matrix when running the simulation function. 
-
-
+The default value for the nBins parameter is associated with the number of bins for human species, which depends on the genome's length. nBins parameter varies for different species and will be adjusted based on the input count matrix when running the simATACSimulate() function. 
 
 <a name="simulation"></a>**Simulation function**
 
-You can simulate a synthetic count matrix by having the estimated models. The number of cells to be simulated can be manually adjusted.
+Having the estimated parameters, simATAC generates the final counts by simATACSimulate() function. The number of cells to be simulated can be manually adjusted.
 
 ```bash
 > sim <- simATACSimulate(object, nCells = 1000)
@@ -292,7 +293,7 @@ spikeNames(0):
 altExpNames(0):
 ```
 
-The simATACSimulate() function returns a sim object, which is a SingleCellExperiment object with 1000 cells in columns and 642098 bins stored in rows. Both real and simulated scATAC-seq count matrices are sparse with a large number of zero counts. Cell names indicates the index of cells and bin names are associated with the positional information of the bins, including chromosome, starting bin postision, and ending bin position.
+The simATACSimulate() function returns a sim object, a SingleCellExperiment object with 1000 cells in columns and 642098 (for human) bins stored in rows. You can access the simulated sparse count data via assays(), colData(), and rowData() functions from SummarizedExperiment R package. Row names of the SingleCellExperiment counts indicate the index of cells, and column names are associated with the positional information of the bins, including chromosome, starting position, and ending position.
 
 ```bash
 > library(SingleCellExperiment)
@@ -306,7 +307,7 @@ chr1:15001-20000     .     .     .     .     .
 chr1:20001-25000     .     .     .     .     .
 ```
 
-you can also get the bin names and estimated means that are directly obtained from the polynomial function prediction via rowData function from SingleCellExperiment package. Cells' names and library sizes directly sampled from the Guassian mixture model are also provided via colData function. Emphasis that the BinMean and LibSize vaiables reported by colData and rowData are not the final simulated matrix parameters, and as explained they are the intermediary variables in the simulation process. 
+You can access the bin names and simulated bin means that are directly obtained from the polynomial function via rowData function from SummarizedExperiment package. Cells' names and library size values that are directly sampled from the Gaussian mixture model are also provided via colData function. Note that the BinMean and LibSize variables returned by colData and rowData are not from the final simulated counts, and as explained, they are the intermediary variables in the simulation process. 
 
 ```bash
 > head(rowData(sim))
@@ -319,6 +320,7 @@ chr1:10001-15000 chr1:10001-15000 0.00407373696595591
 chr1:15001-20000 chr1:15001-20000 0.00727215505384173
 chr1:20001-25000 chr1:20001-25000 0.00282203544478947
 chr1:25001-30000 chr1:25001-30000 0.00470551609382224
+>
 > head(colData(sim))
 DataFrame with 6 rows and 2 columns
           Cell          LibSize
@@ -331,3 +333,7 @@ Cell5    Cell5 22508.6642767295
 Cell6    Cell6  43532.364826085
 > 
 ```
+
+
+[scater]: https://github.com/davismcc/scater
+[SCE]: https://github.com/drisso/SingleCellExperiment
