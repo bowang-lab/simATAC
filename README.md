@@ -16,7 +16,7 @@ $ R
 ## Getting started
 
 
-simATAC tutorial is provided with examples and explanations about its functions and how to use them. This is detailed documentation that introduces the main features of simATAC.
+simATAC tutorial provides examples and explanations about its functions and how to use them. This documentation introduces the main features of simATAC.
 * [simATAC tutorial](https://github.com/bowang-lab/simATAC/blob/master/docs/tutorial.md)
 
 
