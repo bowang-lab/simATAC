@@ -72,7 +72,7 @@ setParameters <- function(object, update = NULL, ...){
 #'
 #' @example
 #' object <- newsimATACCount()
-#' object <- getParameters(object, c(nCells, species, nBins))
+#' params <- getParameters(object, c(nCells, species, nBins))
 #'
 #' @export
 #'
@@ -99,7 +99,7 @@ getParameters <- function(object, names) {
 #'
 #' @example
 #' object <- newsimATACCount()
-#' object <- simATACget(object, "nBins")
+#' nBins <- simATACget(object, "nBins")
 #'
 #' @importFrom methods slot
 #' @export
