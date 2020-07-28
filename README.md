@@ -15,7 +15,7 @@ desired genomic regions in BED file.
 
 ## Installation.
 
-Install simATAC R package: 
+Install simATAC R package (R >= 3.5.0): 
 
 ```bash
 $ R
