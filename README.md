@@ -3,7 +3,7 @@
 simATAC is a framework provided as an R package that generates a single-cell Assay for Transposase-Accessible Chromatin sequencing (scATAC-seq) count matrix, highly resembling real scATAC-seq datasets in library size, sparsity, and averaged chromatin accessibility signals. simATAC deploys statistical functions derived from analyzing 90 real scATAC-seq cell groups to model read distributions. simATAC provides a robust and systematic approach to generate in silico scATAC-seq samples with cell labels for a comprehensive tool assessment.
 
 
-## Installation.
+## Installation
 
 Install simATAC R package (R >= 3.5.0): 
 
