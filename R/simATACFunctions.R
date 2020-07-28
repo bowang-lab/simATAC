@@ -118,7 +118,7 @@ get <- function(object, name) {
 #' @return TRUE if all parameters are valid, otherwise FALSE with the list of invalid
 #' parameters following.
 #'
-#' @importFrom checkmate checkInt checkNumber checkNumeric checkFlag
+#' @importFrom checkmate checkInt checkNumber checkNumeric checkFlag checkCharacter
 #'
 setValidity("simATACCount", function(object) {
 
