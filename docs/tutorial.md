@@ -162,7 +162,7 @@ Parameters:
 
 <a name="get"></a>**Get parameters**
 
-To look at a particular parameter in the simATACCount object, we can run simATACget() function by giving the simATACCount object and a specific parameter as input:
+To look at a particular parameter in the simATACCount object, we can run simATACget() function by giving the simATACCount object and the parameter's name as input:
 
 ```bash
 > nBins <- simATACget(object, "nBins")
