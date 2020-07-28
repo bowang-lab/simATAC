@@ -85,8 +85,6 @@ Slot "noise.mean":
 
 Slot "noise.sd":
 [1] 0
-and print the description for its parameters:
-
 ```
 
 You can print the description for each parameter documented in the simATAC R package by running
