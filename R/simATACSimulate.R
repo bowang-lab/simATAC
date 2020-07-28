@@ -97,7 +97,6 @@ simATACSimulate <- function(object = newsimATACCount(),
   # Set random seed in each run
   seed <- get(object, "seed")
   set.seed(seed)
-  print(paste("seed:", seed))
 
   nCells <- get(object, "nCells")
   nBins <- get(object, "nBins")
