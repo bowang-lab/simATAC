@@ -11,10 +11,10 @@ GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type,
 
 - [Loading simATAC](#load)
 - [simATACCount class](#simATACCount)
-- [Estimation function](#estimation)
-- [Simulation function](#simulation)
 - [Set parameters](#set)
 - [Get parameters](#get)
+- [Estimation function](#estimation)
+- [Simulation function](#simulation)
 
 
 <a name="load"></a>**Loading simATAC**        
@@ -35,7 +35,6 @@ You can print the default values for the simATACCount object parameters (except 
 
 ```bash
 > object
-
 An object of class "simATACCount"
 Slot "nBins":
 [1] 642098
@@ -92,7 +91,6 @@ You can print the description for each parameter documented in the simATAC R pac
 
 ```bash
 > ?simATACCount
-
 simATACCount              package:simATAC              R Documentation
 
 The simATACCount class
@@ -162,12 +160,102 @@ Parameters:
      simulation see ‘simATACSimulate’.
 ```
 
+<a name="get"></a>**Get parameters**
+
+To look at a particular parameter in the simATACCount object, we can run simATACget() function by giving the simATACCount object and a specific parameter as input:
+
+```bash
+> nBins <- simATACget(object, "nBins")
+> nBins
+[1] 642098
+> species <- simATACget(object, "species")
+> species
+[1] "human"
+> nCells <- simATACget(object, "nCells")
+> nCells
+[1] 500
+```
+
+To return a list of parameters, we can use getParameters() function by giving a list of parameters in the input:
+
+```bash
+> params <- getParameters(object, c(nCells, species, nBins))
+> params
+$nBins
+[1] 642098
+
+$species
+[1] "human"
+
+$nCells
+[1] 500
+```
+
+<a name="set"></a>**Set parameters**
+
+We can manually adjust the parameters of the simATACCount object via setParameters() function by giving the object, and a list of parameters.
+
+```bash
+> object <- setParameters(object, nCells = 1000)
+> object <- setParameters(object, noise.mean = -0.3, noise.sd = 0.3)
+> object
+An object of class "simATACCount"
+Slot "nBins":
+[1] 642098
+
+Slot "nCells":
+[1] 1000
+
+Slot "seed":
+[1] 16216
+
+Slot "default":
+[1] TRUE
+
+Slot "species":
+[1] "human"
+
+Slot "lib.mean1":
+[1] 13.60503
+
+Slot "lib.mean2":
+[1] 14.93826
+
+Slot "lib.sd1":
+[1] 1.745264
+
+Slot "lib.sd2":
+[1] 1.009923
+
+Slot "lib.prob":
+[1] 0.5257138
+
+Slot "non.zero.pro":
+[1] 1
+
+Slot "mean.coef0":
+[1] 0.002822035
+
+Slot "mean.coef1":
+[1] 0.6218985
+
+Slot "mean.coef2":
+[1] 1.976122
+
+Slot "noise.mean":
+[1] -0.3
+
+Slot "noise.sd":
+[1] 0.3
+```
 
 <a name="estimation"></a>**Estimation function**
 
-For each user-input, simATAC performs two core simulation steps: (i) estimating the model parameters based on the input bin by cell matrix, including the library sizes of the cells, the non-zero cell proportions of each bin and the read average of each bin; (ii) generating a bin by cell matrix that resembles the original input scATAC-seq data by sampling from Gaussian mixture and polynomial models with the estimated parameters. simATAC outputs a count matrix as a [`SingleCellExperiment`][SCE] object from SingleCellExperiment package, offering additional functions to convert it to other types of feature matrices.
+For each user-input, simATAC performs two core simulation steps: (i) estimating the model parameters based on the input bin by cell matrix, including the library sizes of the cells, the non-zero cell proportions of each bin and the average of reads per bin (bin mean); (ii) generating a bin by cell matrix that resembles the original input scATAC-seq data by sampling from Gaussian mixture and polynomial models with the estimated parameters. simATAC outputs a count matrix as a [`SingleCellExperiment`][SCE] object from SingleCellExperiment package, offering additional functions to convert it to other types of feature matrices.
  
-simATAC allows you to estimate the parameters of the parameters' models by simATACEstimate() function. simATAC provides getCountFromh5() function, which is specifically implemented for reading the sparse bin by cell matrix given a snap file as input. 
+simATAC allows us to estimate the parameters of the real count matrix by simATACEstimate() function. simATACEstimate() gets either a sparse matrix or a SingleCellExperiment object as input to perform the estimation. If the input matrix is in a SingleCellExperiment format, simATAC provides a getCountFromSCE() function that gets the SingleCellExperiment object as input and returns a sparse matrix as output. We can also directly pass the SingleCellExperiment object to the simATACEstimate() function. We first show an example of how to load the bin by cell matrix from the snap file.
+
+simATAC provides a getCountFromh5() function, which is specifically implemented for reading the sparse bin by cell matrix created by Snaptools.
 
 ```bash
 ## return the cell by bin matrix from the snap file
@@ -191,7 +279,7 @@ The count object is a sparse cell by bin matrix (which is directly extracted fro
 
 ```bash
 > library(Matrix)
-
+>
 > object <- simATACEstimate(t(count))
 simATAC is:
 ...Estimating library size...
