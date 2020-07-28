@@ -190,7 +190,7 @@ attr(,"package")
 The count object is a sparse cell by bin matrix (which is directly extracted from snap file), you need to convert it to a bin by cell matrix to be able to feed it into simATAC package.
 
 ```bash
-library(Matrix)
+> library(Matrix)
 
 > object <- simATACEstimate(t(count))
 simATAC is:
@@ -320,6 +320,7 @@ chr1:10001-15000 chr1:10001-15000 0.00407373696595591
 chr1:15001-20000 chr1:15001-20000 0.00727215505384173
 chr1:20001-25000 chr1:20001-25000 0.00282203544478947
 chr1:25001-30000 chr1:25001-30000 0.00470551609382224
+>
 > head(colData(sim))
 DataFrame with 6 rows and 2 columns
           Cell          LibSize
