@@ -61,9 +61,9 @@ setParameters <- function(object, update = NULL, ...){
 }
 
 
-#' Get parameters
+#' Get simATACCount parameters
 #'
-#' Get the value of input parameters from simATACCount object.
+#' Get the value of input variables from simATACCount object.
 #'
 #' @param object Input simATACCount object.
 #' @param names List of parameter names.
@@ -81,16 +81,16 @@ getParameters <- function(object, names) {
   checkmate::assertClass(object, classes = "simATACCount")
   checkmate::assertCharacter(names, min.len = 1, any.missing = FALSE)
 
-  parameter.list <- lapply(names, get, object = object)
+  parameter.list <- lapply(names, simATACget, object = object)
   names(parameter.list) <- names
 
   return(parameter.list)
 }
 
 
-#' Get a parameter
+#' Get a simATACCount parameter
 #'
-#' Get the value of a single parameter from input simATACCount object.
+#' Get the value of a single variable from input simATACCount object.
 #'
 #' @param object Input simATACCount object.
 #' @param name Name of the parameter.
@@ -99,12 +99,12 @@ getParameters <- function(object, names) {
 #'
 #' @example
 #' object <- newsimATACCount()
-#' object <- get(object, "nBins")
+#' object <- simATACget(object, "nBins")
 #'
 #' @importFrom methods slot
 #' @export
 #'
-get <- function(object, name) {
+simATACget <- function(object, name) {
   slot(object, name)
 }
 

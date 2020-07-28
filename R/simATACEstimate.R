@@ -157,7 +157,7 @@ simATACEstNonZeroPro <- function(count, object) {
 #'
 simATACEstBinMean <- function(count, object) {
 
-  non.zero.pro <- get(object, "non.zero.pro")
+  non.zero.pro <- simATACget(object, "non.zero.pro")
   bin.mean <- rowSums(count)/ncol(count)
 
   fit <- lm(bin.mean[which(non.zero.pro < 0.8)]~poly(non.zero.pro[which(non.zero.pro < 0.8)], 2, raw=TRUE))

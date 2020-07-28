@@ -88,18 +88,18 @@ simATACSimulate <- function(object = newsimATACCount(),
 
   validObject(object)
 
-  default <- get(object, "default")
+  default <- simATACget(object, "default")
   if (default == TRUE){
     if (verbose) {message("...Setting default parameters...")}
     object <- setDefautParameters(object)
   }
 
   # Set random seed in each run
-  seed <- get(object, "seed")
+  seed <- simATACget(object, "seed")
   set.seed(seed)
 
-  nCells <- get(object, "nCells")
-  nBins <- get(object, "nBins")
+  nCells <- simATACget(object, "nCells")
+  nBins <- simATACget(object, "nBins")
 
   if (verbose) {message("...Setting up SingleCellExperiment object...")}
 
@@ -179,7 +179,7 @@ setDefautParameters <- function(object){
 #'
 getBinNames <- function(object){
 
-  species <- get(object, "species")
+  species <- simATACget(object, "species")
   file = ""
 
   if(species == "human"){
@@ -208,12 +208,12 @@ getBinNames <- function(object){
 #'
 simATACSimLibSize <- function(object, sim) {
 
-  nCells <- get(object, "nCells")
-  lib.mean1 <- get(object, "lib.mean1")
-  lib.mean2 <- get(object, "lib.mean2")
-  lib.sd1 <- get(object, "lib.sd1")
-  lib.sd2 <- get(object, "lib.sd2")
-  lib.prob <- get(object, "lib.prob")
+  nCells <- simATACget(object, "nCells")
+  lib.mean1 <- simATACget(object, "lib.mean1")
+  lib.mean2 <- simATACget(object, "lib.mean2")
+  lib.sd1 <- simATACget(object, "lib.sd1")
+  lib.sd2 <- simATACget(object, "lib.sd2")
+  lib.prob <- simATACget(object, "lib.prob")
 
   components <- sample(1:2, prob=c(lib.prob, 1-lib.prob), size=nCells, replace=TRUE)
   mus <- c(lib.mean1, lib.mean2)
@@ -241,9 +241,9 @@ simATACSimLibSize <- function(object, sim) {
 #'
 simATACSimZeroEntry <- function(object) {
 
-  nCells <- get(object, "nCells")
-  nBins <- get(object, "nBins")
-  non.zero.pro <- get(object, "non.zero.pro")
+  nCells <- simATACget(object, "nCells")
+  nBins <- simATACget(object, "nBins")
+  non.zero.pro <- simATACget(object, "non.zero.pro")
 
   object <- setParameters(object, non.zero.pro = rbinom(nBins, nCells, as.numeric(non.zero.pro))/nCells)
 
@@ -263,11 +263,11 @@ simATACSimZeroEntry <- function(object) {
 #'
 simATACSimBinMean <- function(object, sim) {
 
-  sim.non.zero.pro <- get(object, "non.zero.pro")
+  sim.non.zero.pro <- simATACget(object, "non.zero.pro")
 
-  c0 <- get(object, "mean.coef0")
-  c1 <- get(object, "mean.coef1")
-  c2 <- get(object, "mean.coef2")
+  c0 <- simATACget(object, "mean.coef0")
+  c1 <- simATACget(object, "mean.coef1")
+  c2 <- simATACget(object, "mean.coef2")
 
   rowData(sim)$BinMean <- sapply(sim.non.zero.pro, simBinMeans, c0=c0, c1=c1, c2=c2)
 
@@ -288,10 +288,10 @@ simATACSimBinMean <- function(object, sim) {
 #'
 simATACSimTrueCount <- function(object, sim) {
 
-  nCells <- get(object, "nCells")
-  nBins <- get(object, "nBins")
-  noise.mean <- get(object, "noise.mean")
-  noise.sd <- get(object, "noise.sd")
+  nCells <- simATACget(object, "nCells")
+  nBins <- simATACget(object, "nBins")
+  noise.mean <- simATACget(object, "noise.mean")
+  noise.sd <- simATACget(object, "noise.sd")
   bin.mean <- rowData(sim)$BinMean
   lib.size <- colData(sim)$LibSize
   mean.sum <- sum(bin.mean)

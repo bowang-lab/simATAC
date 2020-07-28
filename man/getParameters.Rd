@@ -2,7 +2,7 @@
 % Please edit documentation in R/simATACFunctions.R
 \name{getParameters}
 \alias{getParameters}
-\title{Get parameters}
+\title{Get simATACCount parameters}
 \usage{
 getParameters(object, names)
 }
@@ -15,5 +15,5 @@ getParameters(object, names)
 List of parameter values.
 }
 \description{
-Get the value of input parameters from simATACCount object.
+Get the value of input variables from simATACCount object.
 }
