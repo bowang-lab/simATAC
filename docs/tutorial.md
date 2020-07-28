@@ -1,3 +1,5 @@
+# simATAC Tutorial
+
 Welcome to the simATAC simulator! 
 
 simATAC is an R package developed for simulating single-cell ATAC sequencing (scATAC-seq) count matrices. simATAC is an easy to use simulation framework that given a group of cells having similar biological characteristics in the format of a bin by cell matrix as input, it generates a synthetic bin by cell matrix resembling the real samples. simATAC mainly performs two estimation and simulation steps to generate final counts. simATAC provides the offer to convert the simulated bin by cell matrix into the binary version, peak by cell, and any list of regions (as features) by cell matrices. There are separate functions for each step, and this tutorial gives an overview and introduction to simATAC’s functionality.
