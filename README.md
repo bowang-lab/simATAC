@@ -17,7 +17,7 @@ $ R
 
 
 simATAC tutorial provides examples and explanations about its functions and how to use them. This documentation introduces the main features of simATAC.
-* [simATAC tutorial](https://github.com/bowang-lab/simATAC/blob/master/docs/tutorial.md)
+* [simATAC tutorial](https://github.com/bowang-lab/simATAC/blob/master/Docs/tutorial.md)
 
 
 
