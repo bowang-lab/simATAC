@@ -343,13 +343,13 @@ SnapATACClustering <- function(x.sp, species, label.file){
   # First, filter out any bins overlapping with the ENCODE blacklist to prevent from potential artifacts.
   if (species == "mouse"){
     # system("wget http://mitra.stanford.edu/kundaje/akundaje/release/blacklists/mm10-mouse/mm10.blacklist.bed.gz")
-    black_list = read.table("/home/zeinab/Documents/Zeinab/mm10.blacklist.bed.gz")
+    black_list = read.table("mm10.blacklist.bed.gz")
   }else if(species == "human"){
     # system("wget http://mitra.stanford.edu/kundaje/akundaje/release/blacklists/hg38-human/hg38.blacklist.bed.gz")
-    black_list = read.table("/home/zeinab/Documents/Zeinab/hg38.blacklist.bed.gz")
+    black_list = read.table("hg38.blacklist.bed.gz")
 
     # OR download from https://www.encodeproject.org/files/ENCFF356LFX/
-    # black_list = read.table("/home/zeinab/Downloads/ENCFF356LFX.bed.gz")
+    # black_list = read.table("ENCFF356LFX.bed.gz")
   }
 
   black_list.gr = GRanges(
@@ -371,15 +371,13 @@ SnapATACClustering <- function(x.sp, species, label.file){
   x.sp = x.sp[, idy, mat="bmat"]
   x.sp
 
-
   # Dimensionality Reduction
   x.sp = runDiffusionMaps(
     obj=x.sp,
     input.mat="bmat",
     num.eigs=30
   )
-
-
+  
   # Graph-based clustering
   x.sp = runKNN(
     obj=x.sp,
