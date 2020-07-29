@@ -5,7 +5,7 @@ library(diptest)
 library(mclust)
 
 
-# pdf("/project/6035453/znavidi/code/simulator/modelling/rplot_library_size.pdf")
+# pdf("rplot_library_size.pdf")
 # par(mfrow=c(3,3))
 colname = c("dataset",
             "norm-chisqpvalue",
