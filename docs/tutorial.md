@@ -255,7 +255,7 @@ Slot "noise.sd":
 
 <a name="estimation"></a>**Estimation function**
 
-For each user-input, simATAC performs two core simulation steps: (i) estimating the model parameters based on the input bin by cell matrix, including the library sizes of the cells, the non-zero cell proportions of each bin and the average of reads per bin (bin mean); (ii) generating a bin by cell matrix that resembles the original input scATAC-seq data by sampling from Gaussian mixture and polynomial models with the estimated parameters. simATAC outputs a count matrix as a [`SingleCellExperiment`][SCE] (SCE) object from SingleCellExperiment package, offering additional functions to convert it to other types of feature matrices.
+For each user-input, simATAC performs two core simulation steps: (i) estimating the model parameters based on the input bin by cell matrix, including the library sizes of the cells, the non-zero cell proportions of each bin and the average of reads per bin (bin mean); (ii) generating a bin by cell matrix that resembles the original input scATAC-seq data by sampling from Gaussian mixture and polynomial models with the estimated parameters. simATAC outputs a count matrix as a [`SingleCellExperiment`][SCE] (SCE) object from the SingleCellExperiment package, offering additional functions to convert it to other types of feature matrices.
  
 simATAC allows us to estimate the parameters of the real count matrix by simATACEstimate() function. simATACEstimate() gets either a sparse matrix or an SCE object as input to perform the estimation. If the input matrix is in an SCE format, simATAC provides a getCountFromSCE() function that gets the SCE object and returns a sparse matrix. We can also directly pass the SCE object to the simATACEstimate() function. 
 
@@ -385,7 +385,7 @@ spikeNames(0):
 altExpNames(0):
 ```
 
-The simATACSimulate() function returns a sim object, which is a SCE object with 1000 cells in columns and 642098 (for human) bins stored in rows. You can access the simulated sparse count data via counts(), colData(), and rowData() functions from [`SummarizedExperiment`][SE] R package. Column names of the SCE counts indicate the index of cells, and row names are associated with the positional information of the bins, including chromosome, starting position, and ending position.
+The simATACSimulate() function returns a sim object, which is a SCE object with 1000 cells in columns and 642098 (for human) bins stored in rows. You can access the simulated sparse count data via counts(), colData(), and rowData() functions from the [`SummarizedExperiment`][SE] R package. Column names of the SCE counts indicate the index of cells, and row names are associated with the positional information of the bins, including chromosome, starting position, and ending position.
 
 ```bash
 > library(SingleCellExperiment)
