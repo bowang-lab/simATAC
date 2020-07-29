@@ -38,7 +38,7 @@ simATACGenerate <- function(count = NULL, object = newsimATACCount(), default = 
 
 
   if(is.null(count)){
-    default <- FALSE
+    default <- TRUE
   }
   if (default == FALSE){
     object <- simATACEstimate(count, object, verbose)
