@@ -17,6 +17,8 @@ GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type,
 - [Get parameters](#get)
 - [Estimation function](#estimation)
 - [Simulation function](#simulation)
+- [Simulating with default parameters](#default)
+- [Other versions of feature matrices](#other)
 
 
 <a name="load"></a>**Loading simATAC**        
@@ -421,6 +423,119 @@ Cell5    Cell5 22508.6642767295
 Cell6    Cell6  43532.364826085
 > 
 ```
+
+
+<a name="default"></a>**Simulating with default parameters**
+
+If no real scATAC-seq data is available in the format of bin by cell matrix, we still can generate a synthetic scATAC-seq count matrix using the default parameters that are provided in the simATAC package. The default values are the parameters estimated from the GSE99172 data. We first need to create a simATACCount object and pass it to the simATACSimulate function. We can change the default values of any simATACCount parameter by passing them to the simATACSimulate() function.
+
+```bash
+> object <- newsimATACCount()
+> sim <- simATACSimulate(object, nCells = 1000)
+simATAC is:
+...Updating parameters...
+...Setting default parameters...
+...Setting up SingleCellExperiment object...
+...Simulating library size...
+...Simulating non-zero cell proportion...
+...Simulating bin mean...
+...Generating final counts...
+...Done...
+> 
+```
+
+simATACSimulate() function monitors the progress of the simulation steps if the verbose parameter is TRUE. 
+
+```bash
+> object
+An object of class "simATACCount"
+Slot "nBins":
+[1] 642098
+
+Slot "nCells":
+[1] 500
+
+Slot "seed":
+[1] 16216
+
+Slot "default":
+[1] TRUE
+
+Slot "species":
+[1] "human"
+
+Slot "lib.mean1":
+[1] 13.60503
+
+Slot "lib.mean2":
+[1] 14.93826
+
+Slot "lib.sd1":
+[1] 1.745264
+
+Slot "lib.sd2":
+[1] 1.009923
+
+Slot "lib.prob":
+[1] 0.5257138
+
+Slot "non.zero.pro":
+[1] 1
+
+Slot "mean.coef0":
+[1] 0.002822035
+
+Slot "mean.coef1":
+[1] 0.6218985
+
+Slot "mean.coef2":
+[1] 1.976122
+
+Slot "noise.mean":
+[1] 0
+
+Slot "noise.sd":
+[1] 0
+```
+```bash
+> sim
+class: SingleCellExperiment 
+dim: 642098 1000 
+metadata(1): Params
+assays(1): counts
+rownames(642098): chr1:1-5000 chr1:5001-10000 ...
+  chrun_ki270392v1:1-5000 chrun_ki270394v1:1-5000
+rowData names(2): Bin BinMean
+colnames(1000): Cell1 Cell2 ... Cell999 Cell1000
+colData names(2): Cell LibSize
+reducedDimNames(0):
+spikeNames(0):
+```
+
+<a name="other"></a>**Other versions of feature matrices**
+
+simATAC offers converting the simulated bin by cell matrix to other versions of feature matrices. Binary version of the simulated bin by cell matrix can be obtained by
+
+```bash
+> bin.count <- simATACgetBinary(sim)
+> dim(bin.count)
+[1] 642098   1000
+```
+
+We can also extract the peak by cell matrix for the desired number of peak bins. Given the simulated SCE object and the number of peak bins, simATACgetCellByPeak() function returns a sparse peak by cell matrix. The rows contain the bins having the highest bin means considering all simulated cells.
+
+```bash
+> peak.count <- simATACgetCellByPeak(sim, peak.num = 5000)
+> dim(peak.count)
+[1] 5000 1000
+```
+
+simATAC offers the simATACgetCellByRegion() function, which returns a feature matirx extracted from the simulated bin by cell array. Features can be any list of genome regions given as a bed file.
+
+```bash
+> peak.count <- simATACgetCellByRegion(sim, file.bed = "example.bed")
+```
+
 
 
 [scater]: https://github.com/davismcc/scater
