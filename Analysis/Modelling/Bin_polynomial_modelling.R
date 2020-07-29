@@ -11,7 +11,7 @@ library(ggplot2)
 r.squared <- vector()
 
 
-my_fit_multinomial <- function(x, y, my_xlab, my_ylab, sign, name){
+fit_polynomial <- function(x, y, my_xlab, my_ylab, sign, name){
   
   fit1  <- lm(y~x)
   fit2 <- lm(y~poly(x, 2, raw=TRUE))
@@ -57,7 +57,7 @@ analyze_data <- function(x.sp, label){
   x <- bin.nonzero.prob[which(bin.nonzero.prob <= 0.8)]
   y <- bin.mean[which(bin.nonzero.prob <= 0.8)]
   
-  my_fit_multinomial(x, y, "non-zero cells proportion <= 0.8", "bin mean", 1, label)
+  fit_polynomial(x, y, "non-zero cells proportion <= 0.8", "bin mean", 1, label)
   
 }
 
