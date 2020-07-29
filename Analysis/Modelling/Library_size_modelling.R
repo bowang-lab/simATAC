@@ -320,7 +320,6 @@ analyze_data(x.sp, "GSE100033")
 sample.address <- list.files("/GSE129785/new_snap", pattern="*.snap$", all.files=FALSE, full.names=TRUE)
 sample.name <- list.files("/GSE129785/new_snap", pattern="*.snap$", all.files=FALSE, full.names=FALSE)
 
-
 for(i in 1:63){
   x.sp = createSnap(
     file=sample.address[i],
@@ -334,7 +333,7 @@ for(i in 1:63){
 }
 
 
-
 colnames(results) <- colname
 write.table(results, file = "Library_size_original.csv", append=F, sep='\t', row.names = TRUE, quote = FALSE, col.names = TRUE)
+
 # dev.off()
