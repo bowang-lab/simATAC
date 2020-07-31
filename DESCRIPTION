@@ -15,8 +15,8 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
 biocViews:
-Suggests:
-  rhdf5,
+Depends:
+  rhdf5 (>= 2.20.0)
 Imports: 
   BiocGenerics,
   Matrix,
@@ -28,3 +28,4 @@ Imports:
   stats,
   stats4,
   utils  
+
