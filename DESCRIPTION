@@ -1,5 +1,6 @@
 Package: simATAC
 Type: Package
+Date: 2020-07-27
 Title: This package is a single-cell ATAC sequencing simulator
 Version: 1.0.0
 Author: Zeinab Navidi Ghaziani
