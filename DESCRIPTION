@@ -2,13 +2,13 @@ Package: simATAC
 Version: 1.0.0
 Date: 2020-07-27
 Title: This package is a single-cell ATAC-seq simulator
-Author: Zeinab Navidi Ghaziani
 Authors@R: person(given = "Zeinab", family = "Navidi Ghaziani", email = "z.navidi90@gmail.com", role = c("aut", "cre"))
 Description: This package provides a set of functions to simulate single-cell ATAC-seq
-             count matrix from real single-cell samples. simATAC first estimates the 
-             parameters of statistical models fitted to the library size, bin count mean, 
-             and non-zero cell proportion parameters. simATAC generates the final synthetic 
-             counts using the estimated models.
+             count matrix from real single-cell samples, highly resembling real scATAC-seq 
+             datasets in library size, sparsity, and averaged chromatin accessibility 
+             signals. simATAC estimates the parameters of statistical distributions fitted 
+             to the main parameters, and generates the final synthetic counts using the 
+             estimated models.
 biocViews: Software
 URL: https://github.com/bowang-lab/simATAC
 BugReports: https://github.com/bowang-lab/simATAC/issues
