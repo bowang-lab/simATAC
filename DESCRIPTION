@@ -10,12 +10,12 @@ Description: This package provides a set of functions to simulate single-cell AT
              and non-zero cell proportion parameters. simATAC generates the final synthetic 
              counts using the estimated models.
 biocViews:
-URL: <https://github.com/bowang-lab/simATAC>
-‌BugReports: <https://github.com/bowang-lab/simATAC/issues>
+URL: https://github.com/bowang-lab/simATAC
+Depends:
+  SingleCellExperiment
 Imports: 
   BiocGenerics,
   Matrix,
-  SingleCellExperiment,
   SummarizedExperiment,
   checkmate,
   methods,
