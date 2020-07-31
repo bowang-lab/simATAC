@@ -11,6 +11,7 @@ Description: This package provides a set of functions to simulate single-cell AT
              counts using the estimated models.
 biocViews:
 URL: https://github.com/bowang-lab/simATAC
+BugReports: https://github.com/bowang-lab/simATAC/issues
 Depends:
   SingleCellExperiment
 Imports: 
