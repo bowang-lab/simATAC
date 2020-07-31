@@ -1,7 +1,7 @@
 Package: simATAC
 Type: Package
 Title: This package is a single-cell ATAC sequencing simulator
-Version: 0.1.0
+Version: 1.0.0
 Author: Zeinab Navidi Ghaziani
 Maintainer: Zeinab Navidi Ghaziani <zeinab.navidighaziani@uhnresearch.ca>
 Description: This package provides a set of functions to simulate single-cell ATAC-seq
