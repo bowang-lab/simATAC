@@ -1,22 +1,17 @@
 Package: simATAC
-Type: Package
-Date: 2020-07-27
-Title: This package is a single-cell ATAC sequencing simulator
 Version: 1.0.0
+Date: 2020-07-27
+Title: This package is a single-cell ATAC-seq simulator
 Author: Zeinab Navidi Ghaziani
-Maintainer: Zeinab Navidi Ghaziani <zeinab.navidighaziani@uhnresearch.ca>
+Authors@R: person(given = "Zeinab", family = "Navidi Ghaziani", email = "z.navidi90@gmail.com", role = c("aut", "cre"))
 Description: This package provides a set of functions to simulate single-cell ATAC-seq
              count matrix from real single-cell samples. simATAC first estimates the 
              parameters of statistical models fitted to the library size, bin count mean, 
              and non-zero cell proportion parameters. simATAC generates the final synthetic 
              counts using the estimated models.
-License: GPL-3
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.0.2
 biocViews:
-Depends:
-  rhdf5 (>= 2.20.0)
+URL: https://github.com/bowang-lab/simATAC
+‌BugReports: https://github.com/bowang-lab/simATAC/issues
 Imports: 
   BiocGenerics,
   Matrix,
@@ -25,7 +20,12 @@ Imports:
   checkmate,
   methods,
   mixtools,
+  rhdf5 (>= 2.20.0),
   stats,
   stats4,
   utils  
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
 
