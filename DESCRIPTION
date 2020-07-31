@@ -9,7 +9,7 @@ Description: This package provides a set of functions to simulate single-cell AT
              parameters of statistical models fitted to the library size, bin count mean, 
              and non-zero cell proportion parameters. simATAC generates the final synthetic 
              counts using the estimated models.
-biocViews:
+biocViews: Software
 URL: https://github.com/bowang-lab/simATAC
 BugReports: https://github.com/bowang-lab/simATAC/issues
 Depends:
