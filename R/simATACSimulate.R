@@ -297,16 +297,10 @@ simATACSimTrueCount <- function(object, sim) {
   mean.sum <- sum(bin.mean)
   multi.fac <- bin.mean/mean.sum
 
-   count1 <- as(sapply(1:round(nCells/2), 
-                       function(i)
-                         rpois(n=nBins, lib.size[i]*multi.fac)),
-                "dgCMatrix")
-   count2 <- as(sapply(round(nCells/2)+1:nCells, 
-                       function(i)
-                         rpois(n=nBins, lib.size[i]*multi.fac)),
-                "dgCMatrix")
-  
-  BiocGenerics::counts(sim) <- rbind(count1, count2)
+  BiocGenerics::counts(sim) <- as(sapply(1:nCells, 
+                                         function(i)
+                                           rpois(n=nBins, lib.size[i]*multi.fac)),
+                                  "dgCMatrix")
 
   if (noise.sd > 0){
     BiocGenerics::counts(sim) <-as(round(BiocGenerics::counts(sim) +
@@ -314,7 +308,6 @@ simATACSimTrueCount <- function(object, sim) {
                                    "dgCMatrix")
     BiocGenerics::counts(sim)[BiocGenerics::counts(sim) <= 0] <- 0
   }
-  gc()
 
   return(sim)
 }
