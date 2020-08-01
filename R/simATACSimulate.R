@@ -307,6 +307,7 @@ simATACSimTrueCount <- function(object, sim) {
                                    "dgCMatrix")
     BiocGenerics::counts(sim)[BiocGenerics::counts(sim) <= 0] <- 0
   }
+  gc()
 
   return(sim)
 }
