@@ -61,12 +61,8 @@
 #'     }
 #' }
 #'
-#' @references
-#' Navidi Ghaziani Z. (2020).
 #'
-#' Paper: \url{}
-#'
-#' Code: \url{}
+#' Code: \url{https://github.com/bowang-lab/simATAC}
 #'
 #' @seealso
 #' \code{\link{simATACSimLibSize}}, \code{\link{simATACSimZeroEntry}},
