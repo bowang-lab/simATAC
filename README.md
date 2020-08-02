@@ -5,7 +5,7 @@ simATAC is a framework provided as an R package that generates a single-cell Ass
 
 ## Installation
 
-Install simATAC R package: 
+Install simATAC R package (R >= 3.5.0): 
 
 ```bash
 $ R
