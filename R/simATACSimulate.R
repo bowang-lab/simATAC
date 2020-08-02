@@ -307,7 +307,7 @@ simATACSimTrueCount <- function(object, sim) {
   }
   gc()
   
-  assays(sim, withDimnames=FALSE)$counts <- counts
+  assays(sim, withDimnames = FALSE)$counts <- counts
   
   return(sim)
 }
