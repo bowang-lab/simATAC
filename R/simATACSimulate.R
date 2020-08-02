@@ -61,7 +61,6 @@
 #'     }
 #' }
 #'
-#'
 #' Code: \url{https://github.com/bowang-lab/simATAC}
 #'
 #' @seealso
@@ -279,7 +278,7 @@ simATACSimBinMean <- function(object, sim) {
 #'
 #' @return SingleCellExperiment with simulated final counts.
 #'
-#' @importFrom SummarizedExperiment rowData colData<- colData colData<-
+#' @importFrom SummarizedExperiment rowData colData<- colData colData<- assays assays<-
 #' @importFrom stats rpois rnorm
 #'
 simATACSimTrueCount <- function(object, sim) {
@@ -294,19 +293,21 @@ simATACSimTrueCount <- function(object, sim) {
   multi.fac <- bin.mean/mean.sum
   gc()
 
-  BiocGenerics::counts(sim) <- as(sapply(1:nCells, 
-                                         function(i)
-                                           rpois(n=nBins, lib.size[i]*multi.fac)),
-                                  "dgCMatrix")
+  counts <- as(sapply(1:nCells, 
+                      function(i)
+                        rpois(n=nBins, lib.size[i]*multi.fac)),
+               "dgCMatrix")
   gc()
 
   if (noise.sd > 0){
-    BiocGenerics::counts(sim) <-as(round(BiocGenerics::counts(sim) +
-                                           rnorm(nBins*nCells, mean = noise.mean, sd = noise.sd)),
-                                   "dgCMatrix")
-    BiocGenerics::counts(sim)[BiocGenerics::counts(sim) <= 0] <- 0
+    counts <-as(round(counts +
+                        rnorm(nBins*nCells, mean = noise.mean, sd = noise.sd)),
+                "dgCMatrix")
+    counts[counts <= 0] <- 0
   }
   gc()
-
+  
+  assays(sim)$counts <- counts
+  
   return(sim)
 }
