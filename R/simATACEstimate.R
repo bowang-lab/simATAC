@@ -1,13 +1,11 @@
 #' Estimate simATAC simulation parameters
 #'
-#' Estimate parameters for the simATAC simulation from a real bin by cell
-#' input matrix.
+#' Estimate parameters for the simATAC simulation from a real bin by cell input matrix.
 #'
 #' @param count Either a sparse bin by cell count matrix, or a SingleCellExperiment
-#'        object containing count matrix to estimate parameters from.
-#' @param object simATACCount object to store estimated parameters and
-#'        count matrix in it.
-#' @param verbose logical variable. Prints the simulation progress if TRUE.
+#'        object containing a count matrix to estimate parameters.
+#' @param object simATACCount object to store estimated parameters and count matrix in it.
+#' @param verbose Logical variable. Prints the simulation progress if TRUE.
 #'
 #' @return simATACCount object containing the estimated counts and parameters.
 #'
@@ -73,8 +71,8 @@ simATACEstimate.dgCMatrix <- function(count, object = newsimATACCount(), verbose
 
 #' Estimate library size parameters
 #'
-#' A Gaussian mixture distribution is fitted to the log2 transformation
-#' of library size values. The estimated parameters are added to the object
+#' A Gaussian mixture distribution is fitted to the log2 transformation of 
+#' library size values. The estimated parameters are added to the input object
 #' variable. See \code{\link[mixtools]{normalmixEM}} for details on the fitting.
 #'
 #' @param count A sparse count matrix to estimate parameters from.
@@ -138,7 +136,7 @@ simATACEstNonZeroPro <- function(count, object) {
 
 #' Estimate bin coverage mean
 #'
-#' Estimate the coefficients of second degree polynomial relation between bins' non-zero
+#' Estimate the coefficients of second degree polynomial function between bins' non-zero
 #' cell proportions and means.
 #'
 #' @param count A sparse count matrix to estimate parameters from.

@@ -4,12 +4,12 @@
 #' input matrix, and use them for simualting final counts.
 #'
 #' @param count Either a sparse bin by cell count matrix, or a SingleCellExperiment
-#'        object containing count matrix to estimate parameters from.
-#' @param object simATACCount object to store estimated parameters and
-#'        count matrix in it.
+#'        object containing the count matrix to estimate parameters from.
+#' @param object A simATACCount object to store estimated parameters and
+#'        the count matrix in it.
 #' @param default Logical variable. Sets default parameters if TRUE.
-#' @param verbose logical variable. Prints the simulation progress if TRUE.
-#' @param ... any additional parameter settings to override what is provided in
+#' @param verbose Logical variable. Prints the simulation progress if TRUE.
+#' @param ... Any additional parameter settings to override what is provided in
 #'        \code{simATACCount} object.
 #'
 #' @return SingleCellExperiment object containing the estimated counts and parameters.
@@ -51,12 +51,12 @@ simATACGenerate <- function(count = NULL, object = newsimATACCount(), default = 
 }
 
 
-#' Return count matrix from a SingleCellExperiment object. If count matrix is missing
+#' Return a sparse count matrix from a SingleCellExperiment object. If count matrix is missing
 #' a warning is printed and the first assay is returned.
 #'
 #' @param sce SingleCellExperiment input object containing counts.
 #'
-#' @return Sparse matrix containing counts.
+#' @return A sparse matrix containing counts.
 #'
 #' @example
 #' \dontrun{
@@ -86,15 +86,15 @@ getCountFromSCE <- function(sce) {
 }
 
 
-#' Simulate a bin's mean from its non-zero cell proportion
-#' from estimated second degree polynomial coefficients.
+#' Simulate a bin's mean from its non-zero cell proportion from estimated 
+#' second degree polynomial coefficients.
 #'
 #' @param x non-zero cell proportion of a bin.
 #' @param c0 coefficient of x power 0.
 #' @param c1 coefficient of x power 1.
 #' @param c2 coefficient of x power 2.
 #'
-#' @return dependent variable y, which is the simulated bin mean.
+#' @return A dependent variable y, which is the simulated bin mean.
 #'
 simBinMeans <- function(x, c0, c1, c2){
 
@@ -107,9 +107,9 @@ simBinMeans <- function(x, c0, c1, c2){
 
 #' Extract count matrix from h5 file
 #'
-#' @param file Input .h5 (or snap) file to read cell by bin matrix from
+#' @param file Input .h5 (or snap) file to read cell by bin matrix from it.
 #'
-#' @return The cell by bin count matrix from .h5 file
+#' @return A sparse cell by bin count matrix from .h5 file.
 #'
 #' @example
 #' \dontrun{
@@ -167,7 +167,7 @@ simATACgetBinary <- function(sim){
 #' peak by cell matrix by extracting bins having the highest means.
 #'
 #' @param sim SingleCellExperiment object containing simulation parameters.
-#' @param peak.num Number of peak bins to extract from original bin by cell matrix.
+#' @param peak.num Number of peak bins to extract from the input bin by cell matrix.
 #'
 #' @return Sparse matrix containing peak.num bins with the highest bin means.
 #'
@@ -189,13 +189,13 @@ simATACgetCellByPeak <- function(sim, peak.num = 5000){
 }
 
 
-#' This function returns the chr:start-end name format of the input region from bed file. start
-#' and end are coordinated of the begining and end of a specific bin with 5000 length base pairs.
+#' Get the name of the input region from bed file in the format of chr:start-end as a string. Start
+#' and end are coordinates of the beginning and end of a specific bin with 5000 length base pairs.
 #'
-#' @param region input list in the format of [chr, start, end]
-#' @param bin.name List of bin names of the raw bin by cell matrix
+#' @param region Input region in the format of [chr, start, end].
+#' @param bin.name List of bin names of the raw bin by cell matrix.
 #'
-#' @return List of bin names that has intersection with the input region
+#' @return List of bin names that has intersection with the input region.
 #'
 getBin <- function(region, bin.name){
 
@@ -217,12 +217,12 @@ getBin <- function(region, bin.name){
 
 
 #' Convert raw bin by cell matrix in an SingleCellExperiment object into the region by cell
-#' matrix, with regions defined in the input bed file.
+#' matrix, with regions defined in the input BED file.
 #'
 #' @param sim SingleCellExperiment object containing simulation parameters.
-#' @param file.bed Bed file containing chromosome and start and end positions of regions.
+#' @param file.bed BED file containing chromosome, start, and end positions of regions.
 #'
-#' @return Sparse matrix containing bins having intersection with the regions in the bed file.
+#' @return Sparse matrix containing bins having intersection with the regions in the BED file.
 #'
 #' @example
 #' \dontrun{

@@ -3,10 +3,10 @@
 #' Simulate bin by cell count matrix from a sparse single-cell ATAC-seq bin by cell
 #' input using simATAC methods.
 #'
-#' @param object simATACCount object with simulation parameters.
-#'        See \code{\link{simATACCount}} for details.
-#' @param verbose logical variable. Prints the simulation progress if TRUE.
-#' @param ... any additional parameter settings to override what is provided in
+#' @param object simATACCount object with simulation parameters. See \code{\link{simATACCount}} 
+#'        for details.
+#' @param verbose Logical variable. Prints the simulation progress if TRUE.
+#' @param ... Any additional parameter settings to override what is provided in
 #'        \code{simATACCount} object.
 #'
 #' @return SingleCellExperiment object containing the simulated counts.
@@ -26,13 +26,15 @@
 #' sim <- simATACSimulate(object, nCells=500, noise.mean=-0.3, noise.sd=0.3)
 #'
 #' @details
-#'simATAC provides the option to manually adjust each of the \code{simATACCount}
-#' object parameter by calling \code{\link{setParameters}}. See examples for a demonstration
+#' simATAC provides the option to manually adjust each of the \code{simATACCount}
+#' object parameters by calling \code{\link{setParameters}}. See examples for a demonstration
 #' of how this can be used.
 #'
 #' The simulation involves the following steps:
 #' \enumerate{
-#'     \item Set up simulation object
+#'     \item Set up simulation parameters
+#'     \item Set default parameters if needed
+#'     \item Set up SingleCellExperiment object
 #'     \item Simulate library sizes
 #'     \item Simulate non zero entries
 #'     \item Simulate bin means
@@ -46,7 +48,7 @@
 #' \describe{
 #'     \item{\code{rowData}}{
 #'         \describe{
-#'             \item{BinMean}{The simulated bin means.}
+#'             \item{BinMean}{The simulated bins' means.}
 #'         }
 #'     }
 #'     \item{\code{colData}}{
@@ -135,7 +137,7 @@ simATACSimulate <- function(object = newsimATACCount(),
 }
 
 
-#' Calculate the binomial coefficients from an existing dataset GSE99172,
+#' Calculate the polynomial coefficients from an existing dataset GSE99172,
 #' for default values.
 #'
 #' @param object simATACCount object with simulation parameters.
@@ -166,7 +168,7 @@ setDefautParameters <- function(object){
 }
 
 
-#' Set bin names based on the species parameter of the simATACCount object.
+#' Set bin names based on the species variable of the simATACCount object.
 #'
 #' @param object simATACCount object with simulation parameters.
 #'
@@ -196,7 +198,7 @@ getBinNames <- function(object){
 #' @param object simATACCount object with simulation parameters.
 #' @param sim SingleCellExperiment object containing simulation parameters.
 #'
-#' @return SingleCellExperiment object with updated simulation library size.
+#' @return SingleCellExperiment object with updated simulation library sizes.
 #'
 #' @importFrom SummarizedExperiment colData colData<-
 #' @importFrom stats rnorm
@@ -223,8 +225,9 @@ simATACSimLibSize <- function(object, sim) {
 
 
 #' Simulate zero and non-zero entries of simATAC simulation count matrix.
-#' The extracted non-zero proportion from original bin by cell matrix is
-#' used as probability to set cells to zero using Bernoulli distribution.
+#' The extracted non-zero cell proportion from the original bin by cell 
+#' matrix is used as probability to simulate cells with zero counts, using 
+#' Bernoulli distribution.
 #'
 #' @param object simATACCount object with simulation parameters.
 #'
@@ -246,7 +249,7 @@ simATACSimZeroEntry <- function(object) {
 }
 
 
-#' Simulates bin means from estimated polynomial coefficients using
+#' Simulate bin means from estimated polynomial coefficients using
 #' \code{\link{simBinMeans}}.
 #'
 #' @param object simATACCount object with simulation parameters.
@@ -270,7 +273,7 @@ simATACSimBinMean <- function(object, sim) {
 }
 
 
-#' Adjust the simulated library size and bin means to generate final counts
+#' Adjust the simulated library sizes and bin means to generate final counts,
 #' using Poisson distribution, with optional Gaussian noise.
 #'
 #' @param object simATACCount object with simulation parameters.
