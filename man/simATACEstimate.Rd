@@ -14,19 +14,17 @@ simATACEstimate(count, object = newsimATACCount(), verbose = TRUE)
 }
 \arguments{
 \item{count}{Either a sparse bin by cell count matrix, or a SingleCellExperiment
-object containing count matrix to estimate parameters from.}
+object containing a count matrix to estimate parameters.}
 
-\item{object}{simATACCount object to store estimated parameters and
-count matrix in it.}
+\item{object}{simATACCount object to store estimated parameters and count matrix in it.}
 
-\item{verbose}{logical variable. Prints the simulation progress if TRUE.}
+\item{verbose}{Logical variable. Prints the simulation progress if TRUE.}
 }
 \value{
 simATACCount object containing the estimated counts and parameters.
 }
 \description{
-Estimate parameters for the simATAC simulation from a real bin by cell
-input matrix.
+Estimate parameters for the simATAC simulation from a real bin by cell input matrix.
 }
 \seealso{
 \code{\link{simATACEstLibSize}}, \code{\link{simATACEstNonZeroPro}}

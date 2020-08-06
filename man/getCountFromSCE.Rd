@@ -2,7 +2,7 @@
 % Please edit documentation in R/ExtraFunctions.R
 \name{getCountFromSCE}
 \alias{getCountFromSCE}
-\title{Return count matrix from a SingleCellExperiment object. If count matrix is missing
+\title{Return a sparse count matrix from a SingleCellExperiment object. If count matrix is missing
 a warning is printed and the first assay is returned.}
 \usage{
 getCountFromSCE(sce)
@@ -11,9 +11,9 @@ getCountFromSCE(sce)
 \item{sce}{SingleCellExperiment input object containing counts.}
 }
 \value{
-Sparse matrix containing counts.
+A sparse matrix containing counts.
 }
 \description{
-Return count matrix from a SingleCellExperiment object. If count matrix is missing
+Return a sparse count matrix from a SingleCellExperiment object. If count matrix is missing
 a warning is printed and the first assay is returned.
 }

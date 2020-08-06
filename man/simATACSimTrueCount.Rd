@@ -2,7 +2,7 @@
 % Please edit documentation in R/simATACSimulate.R
 \name{simATACSimTrueCount}
 \alias{simATACSimTrueCount}
-\title{Adjust the simulated library size and bin means to generate final counts
+\title{Adjust the simulated library sizes and bin means to generate final counts,
 using Poisson distribution, with optional Gaussian noise.}
 \usage{
 simATACSimTrueCount(object, sim)
@@ -16,6 +16,6 @@ simATACSimTrueCount(object, sim)
 SingleCellExperiment with simulated final counts.
 }
 \description{
-Adjust the simulated library size and bin means to generate final counts
+Adjust the simulated library sizes and bin means to generate final counts,
 using Poisson distribution, with optional Gaussian noise.
 }

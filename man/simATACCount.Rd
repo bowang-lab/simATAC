@@ -19,46 +19,45 @@ simATAC simulation parameters:
     \item{\code{[seed]}}{Seed to use for generating random numbers.}
     \item{\code{[default]}}{The logical variable whether to use default parameters
      (TRUE) or learn from data (FALSE)}
-     \item{\code{[species]}}{The string indicating the species of the input cells}
+     \item{\code{[species]}}{An string indicating the species of the input cells. 
+     Supports "human" and "mouse" in the current version.}
     \item{\emph{Library size parameters}}{
         \describe{
-            \item{\code{lib.mean1}}{Mean parameter for the first
-            component of library size bimodal Gaussian distribution.}
-            \item{\code{lib.mean2}}{Mean parameter for the second
-            component of library size bimodal Gaussian distribution}
-            \item{\code{lib.sd1}}{Standard deviation parameter for the
-            first component of library size bimodal Gaussian distribution.}
-            \item{\code{lib.sd2}}{Standard deviation parameter for the
-            second component of library size bimodal Gaussian distribution.}
-            \item{\code{lib.prob}}{Probability parameter for the first component
-            in bimodal Gaussian distribution. The probability for the second
-            component is 1-lib.prob.}
+            \item{\code{lib.mean1}}{Mean parameter for the first component of library 
+            size bimodal Gaussian distribution.}
+            \item{\code{lib.mean2}}{Mean parameter for the second component of library 
+            size bimodal Gaussian distribution}
+            \item{\code{lib.sd1}}{Standard deviation parameter for the first component 
+            of library size bimodal Gaussian distribution.}
+            \item{\code{lib.sd2}}{Standard deviation parameter for the second component 
+            of library size bimodal Gaussian distribution.}
+            \item{\code{lib.prob}}{Probability parameter for the first component in bimodal 
+            Gaussian distribution. The probability for the second component is 1-lib.prob.}
         }
     }
-    \item{\emph{Zero entry parameters}}{
+    \item{\emph{Non-zero cell proportion parameters}}{
         \describe{
-            \item{\code{non.zero.pro}}{The proportion of non-zero cells per
-            bin in the original count matrix}
-            \item{\code{mean.coef0}}{Estimated coefficient of power zero
-            variable in the polynomial function}
-            \item{\code{mean.coef1}}{Estimated coefficient of power one
-            variable in the polynomial function}
-            \item{\code{mean.coef2}}{Estimated coefficient of power two
-            variable in the polynomial function}
+            \item{\code{non.zero.pro}}{The proportion of non-zero cells per bin in the 
+            original count matrix}
+            \item{\code{mean.coef0}}{Estimated coefficient of power zero variable in the 
+            polynomial function}
+            \item{\code{mean.coef1}}{Estimated coefficient of power one variable in the 
+            polynomial function}
+            \item{\code{mean.coef2}}{Estimated coefficient of power two variable in the 
+            polynomial function}
         }
     }
     \item{\emph{[noise]}}{
         \describe{
-            \item{\code{[noise.mean]}}{Gaussian mean to be added as noise to the final simulated
-   counts}
-            \item{\code{[noise.sd]}}{Gaussian standard deviation to be added as noise to the final simulated
-   counts}
+            \item{\code{[noise.mean]}}{Gaussian mean to be added as noise to the final 
+            simulated counts}
+            \item{\code{[noise.sd]}}{Gaussian standard deviation to be added as noise to 
+            the final simulated counts}
         }
     }
 }
 
 The parameters not shown in brackets can be estimated from real data using
-\code{\link{simATACEstimate}}. For details of the simATAC simulation
-see \code{\link{simATACSimulate}}.
+\code{\link{simATACEstimate}}. For details of the simATAC simulation see \code{\link{simATACSimulate}}.
 }
 

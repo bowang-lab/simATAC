@@ -10,7 +10,7 @@ simATACgetCellByPeak(sim, peak.num = 5000)
 \arguments{
 \item{sim}{SingleCellExperiment object containing simulation parameters.}
 
-\item{peak.num}{Number of peak bins to extract from original bin by cell matrix.}
+\item{peak.num}{Number of peak bins to extract from the input bin by cell matrix.}
 }
 \value{
 Sparse matrix containing peak.num bins with the highest bin means.

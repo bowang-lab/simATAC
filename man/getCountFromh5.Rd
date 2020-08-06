@@ -7,10 +7,10 @@
 getCountFromh5(file)
 }
 \arguments{
-\item{file}{Input .h5 (or snap) file to read cell by bin matrix from}
+\item{file}{Input .h5 (or snap) file to read cell by bin matrix from it.}
 }
 \value{
-The cell by bin count matrix from .h5 file
+A sparse cell by bin count matrix from .h5 file.
 }
 \description{
 Extract count matrix from h5 file

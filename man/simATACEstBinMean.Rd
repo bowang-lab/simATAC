@@ -15,7 +15,7 @@ simATACEstBinMean(count, object)
 simATACCount object with updated polynomial function parameters.
 }
 \description{
-Estimate the coefficients of second degree polynomial relation between bins' non-zero
+Estimate the coefficients of second degree polynomial function between bins' non-zero
 cell proportions and means.
 }
 \details{

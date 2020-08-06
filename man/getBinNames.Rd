@@ -2,7 +2,7 @@
 % Please edit documentation in R/simATACSimulate.R
 \name{getBinNames}
 \alias{getBinNames}
-\title{Set bin names based on the species parameter of the simATACCount object.}
+\title{Set bin names based on the species variable of the simATACCount object.}
 \usage{
 getBinNames(object)
 }
@@ -13,5 +13,5 @@ getBinNames(object)
 List of bin names.
 }
 \description{
-Set bin names based on the species parameter of the simATACCount object.
+Set bin names based on the species variable of the simATACCount object.
 }

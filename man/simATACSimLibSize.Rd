@@ -13,7 +13,7 @@ simATACSimLibSize(object, sim)
 \item{sim}{SingleCellExperiment object containing simulation parameters.}
 }
 \value{
-SingleCellExperiment object with updated simulation library size.
+SingleCellExperiment object with updated simulation library sizes.
 }
 \description{
 Simulate library sizes by sampling from a bimodal Gaussian mixture model based

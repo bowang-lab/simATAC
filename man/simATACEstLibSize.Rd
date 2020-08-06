@@ -15,7 +15,7 @@ simATACEstLibSize(count, object)
 simATACCount object with updated library size parameter.
 }
 \description{
-A Gaussian mixture distribution is fitted to the log2 transformation
-of library size values. The estimated parameters are added to the object
+A Gaussian mixture distribution is fitted to the log2 transformation of 
+library size values. The estimated parameters are added to the input object
 variable. See \code{\link[mixtools]{normalmixEM}} for details on the fitting.
 }

@@ -2,8 +2,8 @@
 % Please edit documentation in R/ExtraFunctions.R
 \name{simBinMeans}
 \alias{simBinMeans}
-\title{Simulate a bin's mean from its non-zero cell proportion
-from estimated second degree polynomial coefficients.}
+\title{Simulate a bin's mean from its non-zero cell proportion from estimated 
+second degree polynomial coefficients.}
 \usage{
 simBinMeans(x, c0, c1, c2)
 }
@@ -17,9 +17,9 @@ simBinMeans(x, c0, c1, c2)
 \item{c2}{coefficient of x power 2.}
 }
 \value{
-dependent variable y, which is the simulated bin mean.
+A dependent variable y, which is the simulated bin mean.
 }
 \description{
-Simulate a bin's mean from its non-zero cell proportion
-from estimated second degree polynomial coefficients.
+Simulate a bin's mean from its non-zero cell proportion from estimated 
+second degree polynomial coefficients.
 }

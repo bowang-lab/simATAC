@@ -14,16 +14,16 @@ simATACGenerate(
 }
 \arguments{
 \item{count}{Either a sparse bin by cell count matrix, or a SingleCellExperiment
-object containing count matrix to estimate parameters from.}
+object containing the count matrix to estimate parameters from.}
 
-\item{object}{simATACCount object to store estimated parameters and
-count matrix in it.}
+\item{object}{A simATACCount object to store estimated parameters and
+the count matrix in it.}
 
 \item{default}{Logical variable. Sets default parameters if TRUE.}
 
-\item{verbose}{logical variable. Prints the simulation progress if TRUE.}
+\item{verbose}{Logical variable. Prints the simulation progress if TRUE.}
 
-\item{...}{any additional parameter settings to override what is provided in
+\item{...}{Any additional parameter settings to override what is provided in
 \code{simATACCount} object.}
 }
 \value{

@@ -303,9 +303,12 @@ simATACSimTrueCount <- function(object, sim) {
   gc()
 
   if (noise.sd > 0){
-    counts <-as(round(counts +
-                        rnorm(nBins*nCells, mean = noise.mean, sd = noise.sd)),
+    noise <- as(sapply(1:nCells, 
+                       function(i)
+                         round(rnorm(n=nBins, mean = noise.mean, sd = noise.sd))),
                 "dgCMatrix")
+
+    counts <- counts + noise
     counts[counts <= 0] <- 0
   }
   gc()

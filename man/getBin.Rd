@@ -2,20 +2,20 @@
 % Please edit documentation in R/ExtraFunctions.R
 \name{getBin}
 \alias{getBin}
-\title{This function returns the chr:start-end name format of the input region from bed file. start
-and end are coordinated of the begining and end of a specific bin with 5000 length base pairs.}
+\title{Get the name of the input region from bed file in the format of chr:start-end as a string. Start
+and end are coordinates of the beginning and end of a specific bin with 5000 length base pairs.}
 \usage{
 getBin(region, bin.name)
 }
 \arguments{
-\item{region}{input list in the format of [chr, start, end]}
+\item{region}{Input region in the format of [chr, start, end].}
 
-\item{bin.name}{List of bin names of the raw bin by cell matrix}
+\item{bin.name}{List of bin names of the raw bin by cell matrix.}
 }
 \value{
-List of bin names that has intersection with the input region
+List of bin names that has intersection with the input region.
 }
 \description{
-This function returns the chr:start-end name format of the input region from bed file. start
-and end are coordinated of the begining and end of a specific bin with 5000 length base pairs.
+Get the name of the input region from bed file in the format of chr:start-end as a string. Start
+and end are coordinates of the beginning and end of a specific bin with 5000 length base pairs.
 }

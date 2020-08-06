@@ -2,7 +2,7 @@
 % Please edit documentation in R/simATACSimulate.R
 \name{simATACSimBinMean}
 \alias{simATACSimBinMean}
-\title{Simulates bin means from estimated polynomial coefficients using
+\title{Simulate bin means from estimated polynomial coefficients using
 \code{\link{simBinMeans}}.}
 \usage{
 simATACSimBinMean(object, sim)
@@ -16,6 +16,6 @@ simATACSimBinMean(object, sim)
 SingleCellExperiment object with updated simulated bin means.
 }
 \description{
-Simulates bin means from estimated polynomial coefficients using
+Simulate bin means from estimated polynomial coefficients using
 \code{\link{simBinMeans}}.
 }

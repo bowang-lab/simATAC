@@ -7,12 +7,12 @@
 simATACSimulate(object = newsimATACCount(), verbose = TRUE, ...)
 }
 \arguments{
-\item{object}{simATACCount object with simulation parameters.
-See \code{\link{simATACCount}} for details.}
+\item{object}{simATACCount object with simulation parameters. See \code{\link{simATACCount}} 
+for details.}
 
-\item{verbose}{logical variable. Prints the simulation progress if TRUE.}
+\item{verbose}{Logical variable. Prints the simulation progress if TRUE.}
 
-\item{...}{any additional parameter settings to override what is provided in
+\item{...}{Any additional parameter settings to override what is provided in
 \code{simATACCount} object.}
 }
 \value{
@@ -24,12 +24,14 @@ input using simATAC methods.
 }
 \details{
 simATAC provides the option to manually adjust each of the \code{simATACCount}
-object parameter by calling \code{\link{setParameters}}. See examples for a demonstration
+object parameters by calling \code{\link{setParameters}}. See examples for a demonstration
 of how this can be used.
 
 The simulation involves the following steps:
 \enumerate{
-    \item Set up simulation object
+    \item Set up simulation parameters
+    \item Set default parameters if needed
+    \item Set up SingleCellExperiment object
     \item Simulate library sizes
     \item Simulate non zero entries
     \item Simulate bin means
@@ -43,7 +45,7 @@ contains the simulated count matrix. The parameters are stored in the \code{\lin
 \describe{
     \item{\code{rowData}}{
         \describe{
-            \item{BinMean}{The simulated bin means.}
+            \item{BinMean}{The simulated bins' means.}
         }
     }
     \item{\code{colData}}{

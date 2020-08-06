@@ -3,8 +3,9 @@
 \name{simATACSimZeroEntry}
 \alias{simATACSimZeroEntry}
 \title{Simulate zero and non-zero entries of simATAC simulation count matrix.
-The extracted non-zero proportion from original bin by cell matrix is
-used as probability to set cells to zero using Bernoulli distribution.}
+The extracted non-zero cell proportion from the original bin by cell 
+matrix is used as probability to simulate cells with zero counts, using 
+Bernoulli distribution.}
 \usage{
 simATACSimZeroEntry(object)
 }
@@ -16,6 +17,7 @@ simATACCount object with updated simulation parameters.
 }
 \description{
 Simulate zero and non-zero entries of simATAC simulation count matrix.
-The extracted non-zero proportion from original bin by cell matrix is
-used as probability to set cells to zero using Bernoulli distribution.
+The extracted non-zero cell proportion from the original bin by cell 
+matrix is used as probability to simulate cells with zero counts, using 
+Bernoulli distribution.
 }

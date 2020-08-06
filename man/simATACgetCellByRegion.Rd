@@ -3,19 +3,19 @@
 \name{simATACgetCellByRegion}
 \alias{simATACgetCellByRegion}
 \title{Convert raw bin by cell matrix in an SingleCellExperiment object into the region by cell
-matrix, with regions defined in the input bed file.}
+matrix, with regions defined in the input BED file.}
 \usage{
 simATACgetCellByRegion(sim, file.bed)
 }
 \arguments{
 \item{sim}{SingleCellExperiment object containing simulation parameters.}
 
-\item{file.bed}{Bed file containing chromosome and start and end positions of regions.}
+\item{file.bed}{BED file containing chromosome, start, and end positions of regions.}
 }
 \value{
-Sparse matrix containing bins having intersection with the regions in the bed file.
+Sparse matrix containing bins having intersection with the regions in the BED file.
 }
 \description{
 Convert raw bin by cell matrix in an SingleCellExperiment object into the region by cell
-matrix, with regions defined in the input bed file.
+matrix, with regions defined in the input BED file.
 }

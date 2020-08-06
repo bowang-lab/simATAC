@@ -2,7 +2,7 @@
 % Please edit documentation in R/simATACSimulate.R
 \name{setDefautParameters}
 \alias{setDefautParameters}
-\title{Calculate the binomial coefficients from an existing dataset GSE99172,
+\title{Calculate the polynomial coefficients from an existing dataset GSE99172,
 for default values.}
 \usage{
 setDefautParameters(object)
@@ -14,6 +14,6 @@ setDefautParameters(object)
 simATACCount object variable with default variables.
 }
 \description{
-Calculate the binomial coefficients from an existing dataset GSE99172,
+Calculate the polynomial coefficients from an existing dataset GSE99172,
 for default values.
 }
