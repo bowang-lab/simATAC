@@ -303,15 +303,34 @@ simATACSimTrueCount <- function(object, sim) {
   gc()
 
   if (noise.sd > 0){
-    noise <- as(sapply(1:nCells, 
-                       function(i)
-                         round(rnorm(n=nBins, mean = noise.mean, sd = noise.sd))),
-                "dgCMatrix")
+    
+    end <- round(nCells/3)
+    counts1 <- as(sapply(1:end,
+                         function(i)
+                           round(counts[,i]+rnorm(n=nBins, mean = noise.mean, sd = noise.sd))),
+                  "dgCMatrix")
+    counts1[counts1 <= 0] <- 0
+    gc()
 
-    counts <- counts + noise
-    counts[counts <= 0] <- 0
+    start <- end+1
+    end <- round(2*nCells/3)
+    counts2 <- as(sapply(start:end,
+                         function(i)
+                           round(counts[,i]+rnorm(n=nBins, mean = noise.mean, sd = noise.sd))),
+                  "dgCMatrix")
+    counts2[counts2 <= 0] <- 0
+    gc()
+    
+    start <- end+1
+    counts3 <- as(sapply(start:nCells,
+                         function(i)
+                           round(counts[,i]+rnorm(n=nBins, mean = noise.mean, sd = noise.sd))),
+                  "dgCMatrix")
+    counts3[counts3 <= 0] <- 0
+    gc()
+
+    counts <- cbind(counts1, counts2, counts3)
   }
-  gc()
   
   assays(sim, withDimnames = FALSE)$counts <- counts
   
