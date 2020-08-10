@@ -591,8 +591,12 @@ simATACCompare(assay(sim), t(count), '/GSE99172', 'GSE99172')
 <img src="./Library_size_boxplot.png" width="190" height="190" /> <img src="./Bin_sparsity_boxplot.png" width="190" height="190" /> <img src="./Cell_sparsity_boxplot.png" width="190" height="190" />
 <img src="./Real_bin_mean_and_nonzero_proportion.png" width="190" height="190" /> <img src="./Simulated_bin_mean_and_nonzero_proportion.png" width="190" height="190" />
 
-Results show that simATAC highly resembles the library size, sparsity and averaged chromatin accessibility signals from real cells.
+Results show that simATAC highly resembles the library size, sparsity and averaged chromatin accessibility signals from real cells. simATACCompare() also reports the Pearson correlation between real and simulated bin means (excluding bins having non-zero cell proportion higher than 0.8 in a real matrix), and Pearson correlation between real and simulated non-zero cell proportion for the corresponding bins.
 
+| Parameter  | Correlation |
+| ------------- | ------------- |
+| Bin mean  | 0.96  |
+| Non-zero cell proportion  | 0.96  |
 
 [scater]: https://github.com/davismcc/scater
 [SCE]: https://github.com/drisso/SingleCellExperiment
