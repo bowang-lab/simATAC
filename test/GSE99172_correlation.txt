@@ -1,5 +1,0 @@
-GSE99172    BinMeanCor<=0.8    0.967540568193936
-GSE99172    NZeroPropCor    0.967646044387176
-Name    Parameter    Pearson correlation
-GSE99172    BinMeanCor<=0.8    0.967540568193936
-GSE99172    NZeroPropCor    0.967646044387176
