@@ -588,8 +588,8 @@ sim <- simATACSimulate(object, nCells = 288)
 simATACCompare(assay(sim), t(count), '/GSE99172', 'GSE99172')
 ```
 
-<img src="./Library_size_boxplot.png" width="200" height="200" /> <img src="./Bin_sparsity_boxplot.png" width="200" height="200" /> <img src="./Cell_sparsity_boxplot.png" width="200" height="200" />
-<img src="./Real_bin_mean_and_nonzero_proportion.png" width="200" height="200" /> <img src="./Simulated_bin_mean_and_nonzero_proportion.png" width="200" height="200" />
+<img src="./Library_size_boxplot.png" width="190" height="190" /> <img src="./Bin_sparsity_boxplot.png" width="190" height="190" /> <img src="./Cell_sparsity_boxplot.png" width="190" height="190" />
+<img src="./Real_bin_mean_and_nonzero_proportion.png" width="190" height="190" /> <img src="./Simulated_bin_mean_and_nonzero_proportion.png" width="190" height="190" />
 
 Results show that simATAC highly resembles the library size, sparsity and averaged chromatin accessibility signals from real cells.
 
