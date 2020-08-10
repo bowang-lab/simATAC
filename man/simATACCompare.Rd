@@ -3,8 +3,11 @@
 \name{simATACCompare}
 \alias{simATACCompare}
 \title{Compare the main parameters of simATAC's simulated bin by cell matrix to real
-matrix, including library size, bin mean, non-zero cell proportion, and the
-relation between bin means and non-zero cell proportions.}
+matrix, including library size, bin mean, non-zero cell proportion, the
+relation between bin means and non-zero cell proportions in real and simulated
+matrices, and the Pearson correlation of the bin mean and non-zero cell proporton 
+parameters in the real and simulated count matrices (if the number of simulated 
+cells equals the number of real cells).}
 \usage{
 simATACCompare(sim, real, address, name)
 }
@@ -22,6 +25,9 @@ simATACCompare(sim, real, address, name)
 }
 \description{
 Compare the main parameters of simATAC's simulated bin by cell matrix to real
-matrix, including library size, bin mean, non-zero cell proportion, and the
-relation between bin means and non-zero cell proportions.
+matrix, including library size, bin mean, non-zero cell proportion, the
+relation between bin means and non-zero cell proportions in real and simulated
+matrices, and the Pearson correlation of the bin mean and non-zero cell proporton 
+parameters in the real and simulated count matrices (if the number of simulated 
+cells equals the number of real cells).
 }

@@ -80,14 +80,14 @@ simATACSimulate <- function(object = newsimATACCount(),
   checkmate::assertClass(object, "simATACCount")
 
   if (verbose) {message("simATAC is:")}
-  if (verbose) {message("...Updating parameters...")}
+  if (verbose) {message("...updating parameters...")}
   object <- setParameters(object, ...)
 
   validObject(object)
 
   default <- simATACget(object, "default")
   if (default == TRUE){
-    if (verbose) {message("...Setting default parameters...")}
+    if (verbose) {message("...setting default parameters...")}
     object <- setDefautParameters(object)
   }
 
@@ -98,7 +98,7 @@ simATACSimulate <- function(object = newsimATACCount(),
   nCells <- simATACget(object, "nCells")
   nBins <- simATACget(object, "nBins")
 
-  if (verbose) {message("...Setting up SingleCellExperiment object...")}
+  if (verbose) {message("...setting up SingleCellExperiment object...")}
 
   cell.names <- paste0("Cell", seq_len(nCells))
   bin.names <- getBinNames(object)
@@ -113,19 +113,19 @@ simATACSimulate <- function(object = newsimATACCount(),
                               colData = cells,
                               metadata = list(Params = object))
 
-  if (verbose) {message("...Simulating library size...")}
+  if (verbose) {message("...simulating library size...")}
   sim <- simATACSimLibSize(object, sim)
   gc()
 
-  if (verbose) {message("...Simulating non-zero cell proportion...")}
+  if (verbose) {message("...simulating non-zero cell proportion...")}
   object <- simATACSimZeroEntry(object)
   gc()
 
-  if (verbose) {message("...Simulating bin mean...")}
+  if (verbose) {message("...simulating bin mean...")}
   sim <- simATACSimBinMean(object, sim)
   gc()
 
-  if (verbose) {message("...Generating final counts...")}
+  if (verbose) {message("...generating final counts...")}
   sim <- simATACSimTrueCount(object, sim)
 
   colnames(BiocGenerics::counts(sim)) <- cell.names

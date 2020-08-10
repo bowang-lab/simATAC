@@ -56,13 +56,13 @@ simATACEstimate.dgCMatrix <- function(count, object = newsimATACCount(), verbose
 
   if (verbose) {message("simATAC is:")}
 
-  if (verbose) {message("...Estimating library size...")}
+  if (verbose) {message("...estimating library size...")}
   object <- simATACEstLibSize(count, object)
 
-  if (verbose) {message("...Estimating non-zero cell proportion...")}
+  if (verbose) {message("...estimating non-zero cell proportion...")}
   object <- simATACEstNonZeroPro(norm.count, object)
 
-  if (verbose) {message("...Estimating bin mean...")}
+  if (verbose) {message("...estimating bin mean...")}
   object <- simATACEstBinMean(norm.count, object)
 
   return(object)
