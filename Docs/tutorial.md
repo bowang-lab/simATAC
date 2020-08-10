@@ -598,6 +598,11 @@ Results show that simATAC highly resembles the library size, sparsity and averag
 | Bin mean  | 0.96  |
 | Non-zero cell proportion  | 0.96  |
 
+Here are the plots to compare the main characteristics of 1000 simulated cells with 288 real cells:
+
+<img src="./Library_size_boxplot_1000_noise0.png" width="190" height="190" /> <img src="./Bin_sparsity_boxplot_1000_noise0.png" width="190" height="190" /> <img src="./Cell_sparsity_boxplot_1000_noise0.png" width="190" height="190" />
+<img src="./Real_bin_mean_and_nonzero_proportion_1000_noise0.png" width="190" height="190" /> <img src="./Simulated_bin_mean_and_nonzero_proportion_1000_noise0.png" width="190" height="190" />
+
 [scater]: https://github.com/davismcc/scater
 [SCE]: https://github.com/drisso/SingleCellExperiment
 [SE]: https://github.com/Bioconductor/SummarizedExperiment
