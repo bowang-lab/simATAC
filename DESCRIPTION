@@ -2,7 +2,7 @@ Package: simATAC
 Version: 1.0.0
 Date: 2020-07-27
 Title: This package is a single-cell ATAC-seq simulator
-Authors@R: person(given = "Zeinab", family = "Navidi Ghaziani", email = "z.navidi90@gmail.com", role = c("aut", "cre"))
+Authors@R: person(given = "Zeinab", family = "Navidi Ghaziani", email = "zeinab.nvd@gmail.com", role = c("aut", "cre"))
 Description: This package provides a set of functions to simulate single-cell ATAC-seq
              count matrix from real single-cell samples, highly resembling real scATAC-seq 
              datasets in library size, sparsity, and averaged chromatin accessibility 
