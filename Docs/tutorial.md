@@ -425,7 +425,6 @@ Cell3    Cell3 172995.376312487
 Cell4    Cell4 68915.5581219072
 Cell5    Cell5 22508.6642767295
 Cell6    Cell6  43532.364826085
-> 
 ```
 
 
@@ -447,7 +446,6 @@ simATAC is:
 ...simulating bin mean...
 ...generating final counts...
 ...Done...
-> 
 ```
 
 simATACSimulate() function monitors the progress of the simulation steps if the verbose parameter is TRUE. 
