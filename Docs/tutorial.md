@@ -643,6 +643,11 @@ simATAC is:
 <img src="./Library_size_boxplot_288_noise0.3.png" width="190" height="190" /> <img src="./Bin_sparsity_boxplot_288_noise0.3.png" width="190" height="190" /> <img src="./Cell_sparsity_boxplot_288_noise0.3.png" width="190" height="190" />
 <img src="./Real_bin_mean_and_nonzero_proportion_288_noise0.3.png" width="190" height="190" /> <img src="./Simulated_bin_mean_and_nonzero_proportion_288_noise0.3.png" width="190" height="190" />
 
+| Parameter  | Correlation |
+| ------------- | ------------- |
+| Bin mean  | 0.96  |
+| Non-zero cell proportion  | 0.96  |
+
 [scater]: https://github.com/davismcc/scater
 [SCE]: https://github.com/drisso/SingleCellExperiment
 [SE]: https://github.com/Bioconductor/SummarizedExperiment
