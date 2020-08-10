@@ -254,8 +254,11 @@ simATACgetCellByRegion <- function(sim, file.bed){
 
 
 #' Compare the main parameters of simATAC's simulated bin by cell matrix to real
-#' matrix, including library size, bin mean, non-zero cell proportion, and the
-#' relation between bin means and non-zero cell proportions.
+#' matrix, including library size, bin mean, non-zero cell proportion, the
+#' relation between bin means and non-zero cell proportions in real and simulated
+#' matrices, and the Pearson correlation of the bin mean and non-zero cell proporton 
+#' parameters in the real and simulated count matrices (if the number of simulated 
+#' cells equals the number of real cells). 
 #'
 #' @param sim Simulated bin by cell sparse matrix.
 #' @param real Real bin by cell sparse matrix.
