@@ -18,3 +18,13 @@ $ R
 
 simATAC tutorial provides examples and explanations of its functions and how to use them. This documentation introduces the main features of simATAC.
 * [simATAC tutorial](https://github.com/bowang-lab/simATAC/blob/master/Docs/tutorial.md)
+
+
+
+## Contact the Author
+
+Report bugs and provide suggestions by sending email to:
+
+Author and maintainer: Zeinab Navidi Ghaziani (zeinab.nvd@gmail.com)
+
+Or open a new issue on this Github page.
