@@ -149,7 +149,7 @@ simATACSimulate <- function(object = newsimATACCount(),
 #'
 setDefautParameters <- function(object){
 
-  path <- system.file("extdata", "GSE99172.txt", package = "simATAC")
+  path <- system.file("extdata", "GSE99172.txt", package="simATAC")
   data <- read.table(path, sep=",")
   colnames(data) <- c("bin.mean", "non.zero.pro")
 
@@ -159,7 +159,7 @@ setDefautParameters <- function(object){
   c2 <- unname(coef(fit)[3])
 
   object <- setParameters(object,
-                        non.zero.pro = as.numeric(data[,2]),
+                        non.zero.pro=as.numeric(data[,2]),
                         mean.coef0=c0,
                         mean.coef1=c1,
                         mean.coef2=c2)
@@ -177,14 +177,13 @@ setDefautParameters <- function(object){
 getBinNames <- function(object){
 
   species <- simATACget(object, "species")
-  file = ""
+  ref <- c('hg19', 'hg38', 'mm9', 'mm10')
 
-  if(species == "human"){
-    file <- system.file("extdata", "Human_genome_coordinates.txt", package = "simATAC")
-  }else if(species == "mouse"){
-    file <- system.file("extdata", "Mouse_genome_coordinates.txt", package = "simATAC")
+  if  (!(species %in% ref)){
+    stop(species, " referene is not supported by current version of simATAC. simATAC supports hg19, hg38, mm9, and mm10 references.")
   }
 
+  file <- system.file("extdata", paste(species, "_genome_coordinates.txt", sep=""), package = "simATAC")
   data <- read.table(file)
   bin.names <- paste(tolower(data$chr), ":", data$start, "-", data$end, sep = "")
 
@@ -290,15 +289,15 @@ simATACSimTrueCount <- function(object, sim) {
   nBins <- simATACget(object, "nBins")
   noise.mean <- simATACget(object, "noise.mean")
   noise.sd <- simATACget(object, "noise.sd")
+  sparse.fac <- simATACget(object, "sparse.fac")
   bin.mean <- rowData(sim)$BinMean
   lib.size <- colData(sim)$LibSize
   mean.sum <- sum(bin.mean)
   multi.fac <- bin.mean/mean.sum
-  gc()
-
+  
   counts <- as(sapply(1:nCells, 
                       function(i)
-                        rpois(n=nBins, lib.size[i]*multi.fac)),
+                        rpois(n=nBins, lib.size[i]*multi.fac*sparse.fac)),
                "dgCMatrix")
   gc()
 

@@ -13,7 +13,7 @@
 #'     \item{\code{[default]}}{The logical variable whether to use default parameters
 #'      (TRUE) or learn from data (FALSE)}
 #'      \item{\code{[species]}}{An string indicating the species of the input cells. 
-#'      Supports "human" and "mouse" in the current version.}
+#'      Supports "hg38", "hg19", "mm9", and "mm10" in the current version.}
 #'     \item{\emph{Library size parameters}}{
 #'         \describe{
 #'             \item{\code{lib.mean1}}{Mean parameter for the first component of library 
@@ -48,6 +48,8 @@
 #'             the final simulated counts}
 #'         }
 #'     }
+#'     \item{\code{sparse.fac}}{Sparsit factor to be multiplied to the input of Poisson 
+#'       distribution on the final simulated count matrix}
 #' }
 #'
 #' The parameters not shown in brackets can be estimated from real data using
@@ -73,12 +75,13 @@ setClass("simATACCount",
                    mean.coef1 = "numeric",
                    mean.coef2 = "numeric",
                    noise.mean = "numeric",
-                   noise.sd = "numeric"),
+                   noise.sd = "numeric",
+                   sparse.fac = "numeric"),
          prototype = prototype(nBins = 642098,
                                nCells = 500,
                                seed = sample(seq_len(1e5), 1),
                                default = TRUE,
-                               species = "human",
+                               species = "hg38",
                                lib.mean1 = 13.60503,
                                lib.mean2 = 14.93826,
                                lib.sd1 = 1.745264,
@@ -89,4 +92,5 @@ setClass("simATACCount",
                                mean.coef1 = 0.6218985,
                                mean.coef2 = 1.976122,
                                noise.mean = 0,
-                               noise.sd = 0))
+                               noise.sd = 0,
+                               sparse.fac = 1))

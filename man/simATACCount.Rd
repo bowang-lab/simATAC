@@ -20,7 +20,7 @@ simATAC simulation parameters:
     \item{\code{[default]}}{The logical variable whether to use default parameters
      (TRUE) or learn from data (FALSE)}
      \item{\code{[species]}}{An string indicating the species of the input cells. 
-     Supports "human" and "mouse" in the current version.}
+     Supports "hg38", "hg19", "mm9", and "mm10" in the current version.}
     \item{\emph{Library size parameters}}{
         \describe{
             \item{\code{lib.mean1}}{Mean parameter for the first component of library 
@@ -55,6 +55,8 @@ simATAC simulation parameters:
             the final simulated counts}
         }
     }
+    \item{\code{sparse.fac}}{Sparsit factor to be multiplied to the input of Poisson 
+      distribution on the final simulated count matrix}
 }
 
 The parameters not shown in brackets can be estimated from real data using

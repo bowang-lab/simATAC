@@ -139,7 +139,8 @@ setValidity("simATACCount", function(object) {
               mean.coef1 = checkNumber(name.list$mean.coef1),
               mean.coef2 = checkNumber(name.list$mean.coef2),
               noise.mean = checkNumber(name.list$noise.mean),
-              noise.sd = checkNumber(name.list$noise.sd))
+              noise.sd = checkNumber(name.list$noise.sd),
+              sparse.fac = checkNumber(name.list$sparse.fac, lower = 0))
 
   if (all(checks == TRUE)) {
     valid <- TRUE
