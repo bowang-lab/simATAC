@@ -649,9 +649,11 @@ simATAC is:
 
 
 <a name="binposition"></a>**Bin position**
+
 The simATACCount object has a bin.coordinate.file parameter, which indicates the address of the file containing bins' chromosome, start and end information. simATAC supports hg19, hg38, mm9, and mm10 bins' position information in its package. However, users can give this parameter as input with the specific format of three columns and the first line header of "chr start end". If this file is not given, and the number of input matrix's bins are different from the bin.coordinate.file, this parameter is set to "None" and the name of bins are not based on the bin position in the format of "chr:start-end". Instead, the bins' names are "BinX" with X the index of bins.
 
 <a name="sparsityfactor"></a>**Sparsity factor**
+
 simATAC defines a $\gamma$ as the sparsity adjustment factor with a default value of 1, which offers users the flexibility to adjust the sparsity as desired. When $\gamma$ is set to be smaller than 1, the simulated scATAC-seq data tend to be more sparse, and vice versa. This factor can be adjusted by manually setting the sparse.fac parameter. sparse.fac is a factor multiplied to the Poisson distribution lambda before simulating the final counts. Based on our analysis, values of 0.8, 0.9, and 1 are the best values in terms of resembling the bin sparsity of input data. 
 
 [scater]: https://github.com/davismcc/scater
