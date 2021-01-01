@@ -12,8 +12,13 @@
 #'     \item{\code{[seed]}}{Seed to use for generating random numbers.}
 #'     \item{\code{[default]}}{The logical variable whether to use default parameters
 #'      (TRUE) or learn from data (FALSE)}
-#'      \item{\code{[species]}}{An string indicating the species of the input cells. 
-#'      Supports "hg38", "hg19", "mm9", and "mm10" in the current version.}
+#'     \item{\code{[species]}}{An string indicating the species of the input cells. 
+#'      simATAC supports "hg38", "hg19", "mm9", and "mm10" in the current version.}
+#'     \item{\code{[bin.coordinate.file]}}{The address of the file containing bins' coordinates
+#'     including three columns in the format of "chr start end". The file must have a header of 
+#'     "chr start end" at the first line. If your data does not match the genome coordinates 
+#'     provided by simATAC, and you do not have the file containing bin information, use the "None"
+#'     value.}
 #'     \item{\emph{Library size parameters}}{
 #'         \describe{
 #'             \item{\code{lib.mean1}}{Mean parameter for the first component of library 
@@ -65,6 +70,7 @@ setClass("simATACCount",
                    seed = "numeric",
                    default = "logical",
                    species = "character",
+                   bin.coordinate.file = "character",
                    lib.mean1 = "numeric",
                    lib.mean2 = "numeric",
                    lib.sd1 = "numeric",
@@ -82,6 +88,7 @@ setClass("simATACCount",
                                seed = sample(seq_len(1e5), 1),
                                default = TRUE,
                                species = "hg38",
+                               bin.coordinate.file = "None",
                                lib.mean1 = 13.60503,
                                lib.mean2 = 14.93826,
                                lib.sd1 = 1.745264,

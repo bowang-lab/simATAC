@@ -133,7 +133,7 @@ getCountFromh5 <- function(file){
   nBins <- length(count.binChrom)
 
   bin.names <- sapply(seq(1, nBins, 1), function(x) paste(count.binChrom[x], count.binStart[x], sep = "_"))
-  count <- Matrix::sparseMatrix(count.x, count.y, x = count.value, dims = c(nCells, nBins))
+  count <- Matrix::sparseMatrix(count.x, count.y, x = as.numeric(count.value), dims = c(nCells, nBins))
 
   return(count)
 }
@@ -295,7 +295,7 @@ simATACCompare <- function(sim, real, address, name){
       axis.text.y = element_text(size = 24)
     ) + theme(legend.position = "none")
   
-  png(paste(address, "/Library_size_boxplot.png", sep = ""))
+  png(paste(address, "/", name, "_library_size_boxplot.png", sep = ""))
   print(p+ylab("log2(library size)"))
   dev.off()
   
@@ -319,7 +319,7 @@ simATACCompare <- function(sim, real, address, name){
       axis.text.y = element_text(size = 24)
     ) + theme(legend.position = "none")
   
-  png(paste(address, "/Bin_sparsity_boxplot.png", sep = ""))
+  png(paste(address, "/", name, "_bin_sparsity_boxplot.png", sep = ""))
   print(p+ylab("Bin sparsity")+ xlab(NULL))
   dev.off()
   
@@ -343,7 +343,7 @@ simATACCompare <- function(sim, real, address, name){
       axis.text.y = element_text(size = 24)
     ) + theme(legend.position = "none")
   
-  png(paste(address, "/Cell_sparsity_boxplot.png", sep = ""))
+  png(paste(address, "/", name, "_cell_sparsity_boxplot.png", sep = ""))
   print(p+ylab("Cell sparsity")+ xlab(NULL))
   dev.off()
   
@@ -372,7 +372,7 @@ simATACCompare <- function(sim, real, address, name){
       axis.text.y = element_text(size = 24)
     )
   
-  png(paste(address, "/Real_bin_mean_and_nonzero_proportion.png", sep = ""))
+  png(paste(address, "/", name, "_real_bin_mean_and_nonzero_proportion.png", sep = ""))
   print(p + xlab("Bin non-zero proportion") + ylab("Bin mean"))
   dev.off()
   
@@ -392,7 +392,7 @@ simATACCompare <- function(sim, real, address, name){
       axis.text.y = element_text(size = 24)
     )
 
-  png(paste(address, "/Simulated_bin_mean_and_nonzero_proportion.png", sep = ""))
+  png(paste(address, "/", name, "_simulated_bin_mean_and_nonzero_proportion.png", sep = ""))
   print(p + xlab("Bin non-zero proportion") + ylab("Bin mean"))
   dev.off()
   

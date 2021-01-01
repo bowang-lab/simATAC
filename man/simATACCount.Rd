@@ -19,8 +19,13 @@ simATAC simulation parameters:
     \item{\code{[seed]}}{Seed to use for generating random numbers.}
     \item{\code{[default]}}{The logical variable whether to use default parameters
      (TRUE) or learn from data (FALSE)}
-     \item{\code{[species]}}{An string indicating the species of the input cells. 
-     Supports "hg38", "hg19", "mm9", and "mm10" in the current version.}
+    \item{\code{[species]}}{An string indicating the species of the input cells. 
+     simATAC supports "hg38", "hg19", "mm9", and "mm10" in the current version.}
+    \item{\code{[bin.coordinate.file]}}{The address of the file containing bins' coordinates
+    including three columns in the format of "chr start end". The file must have a header of 
+    "chr start end" at the first line. If your data does not match the genome coordinates 
+    provided by simATAC, and you do not have the file containing bin information, use the "None"
+    value.}
     \item{\emph{Library size parameters}}{
         \describe{
             \item{\code{lib.mean1}}{Mean parameter for the first component of library 

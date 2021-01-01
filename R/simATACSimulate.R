@@ -177,15 +177,34 @@ setDefautParameters <- function(object){
 getBinNames <- function(object){
 
   species <- simATACget(object, "species")
+  nBins <- simATACget(object, "nBins")
+  bin.coordinate.file <- simATACget(object, "bin.coordinate.file")
   ref <- c('hg19', 'hg38', 'mm9', 'mm10')
+  file <- ""
 
   if  (!(species %in% ref)){
-    stop(species, " referene is not supported by current version of simATAC. simATAC supports hg19, hg38, mm9, and mm10 references.")
+    message(species, " referene is not supported by current version of simATAC. simATAC supports hg19, hg38, mm9, and mm10 references. Please give a file of bin information consistent with your input data with three columns and header of \"chr start end\" as the bin.coordinate.file parameter. If you don't have a file containing the information of bins, simATAC considers the \"bin.coordinate.file\" parameter as \"None\". In this case, you will not be able to get the coordinate information of bins. Please make sure the \"species\" parameter of the simATACCount object is set correctly.")
+    bin.names <- paste0("Bin", seq_len(nBins))
   }
-
-  file <- system.file("extdata", paste(species, "_genome_coordinates.txt", sep=""), package = "simATAC")
-  data <- read.table(file)
-  bin.names <- paste(tolower(data$chr), ":", data$start, "-", data$end, sep = "")
+  
+  if (bin.coordinate.file != 'None'){
+    file <- bin.coordinate.file
+    data <- read.table(file, header = TRUE)
+    bin.names <- paste(tolower(data$chr), ":", data$start, "-", data$end, sep = "")
+  }else if (species %in% ref){
+    file <- system.file("extdata", paste(species, "_genome_coordinates_new.txt", sep=""), package = "simATAC")
+    data <- read.table(file, header = TRUE)
+    bin.names <- paste(tolower(data$chr), ":", data$start, "-", data$end, sep = "")
+  }
+  
+  if (length(bin.names) != nBins){
+    message("Your data has different number of bins compared to the provided genome positions. Please give a file of bin information consistent with your input data with three columns and header of \"chr start end\" as the bin.coordinate.file parameter. If you don't give a file containing the information of bins, simATAC considers the \"bin.coordinate.file\" parameter as \"None\" and names the bins {Bin1 to BinX} with X number of bins. In this case, you wont be able to get the coordinate information of bins. Please make sure the \"species\" parameter of the simATACCount object is set correctly.")
+    bin.names <- paste0("Bin", seq_len(nBins))
+  }
+  
+  
+  
+  
 
   return(bin.names)
 }

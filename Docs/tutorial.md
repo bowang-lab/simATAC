@@ -4,7 +4,7 @@ Welcome to the simATAC simulator!
 
 simATAC is an R package developed explicitly for simulating single-cell ATAC sequencing (scATAC-seq) count matrices. Given a group of cells having similar biological characteristics in the format of a bin by cell matrix in input, simATAC generates a synthetic bin by cell matrix for the desired number of cells, resembling the real samples. simATAC is an easy to use simulation framework mainly performs estimation and simulation steps to synthesize final counts. simATAC offers the option to convert the simulated bin by cell matrix into the binary version, peak by cell version, and any other feature matrices, with features being any list of genome regions in a BED format. This tutorial gives an overview and introduction to simATAC’s functionality.
 
-Assuming there is a scATAC-seq dataset with cells having similar biological characteristics (e.g. cell type), you can convert BAM files into a bin by cell (5 kbp window) matrix with any customized pipeline. We used Snaptools to generate .snap files which contain the bin by cell array. For running examples, we use the snap file of the [GSE99172](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE99172) real scATAC-seq sample. We will skip the snap generation (See [here](https://github.com/r3fang/SnapATAC/wiki/FAQs#whatissnap) for how to generate a snap file). Instead, we will download the snap file from this [link](https://data.wanglab.ml/simATAC/), which is provided in the Example folder . 
+Assuming there is a scATAC-seq dataset with cells having similar biological characteristics (e.g. cell type), you can convert BAM files into a bin by cell (5 kbp window) matrix with any customized pipeline. While we used Snaptools to generate .snap files which contain the bin by cell array, users can deploy any other tools or a customozied pipleine to generate bin-by-cell matrix from real data. For running examples, we use the snap file of the [GSE99172](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE99172) real scATAC-seq sample. We will skip the snap generation (See [here](https://github.com/r3fang/SnapATAC/wiki/FAQs#whatissnap) for how to generate a snap file). Instead, we will download the snap file from this [link](https://data.wanglab.ml/simATAC/), which is provided in the Example folder . 
 
 GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type, and the generated bin by cell matrix (from snap file) contains cells having similar biological characteristics. You can also create the bin by cell matrix for multiple cell types, depending on your original dataset. However, simATAC modelling is based on the assumption that input cells are biologically similar. You need to perform the simulation for each cell group separately. Given the GSE99172 dataset, we use simATAC to simulate desired number of scATAC-seq cells by mimicking read distribution across cells and bins.
 
@@ -22,7 +22,8 @@ GSE99172 dataset includes 288 cells from chronic myelogenous leukemia cell type,
 - [Merge estimation and simulation steps](#merge)
 - [Compare real and simulated matrices](#compare)
 - [Add Gaussian noise](#noise)
-
+- [Bin position](#binposition)
+- [Sparsity factor](#sparsityfactor)
 
 <a name="load"></a>**Loading simATAC**        
 We need to load the simATAC R package to be able to use it.
@@ -645,6 +646,13 @@ simATAC is:
 | ------------- | ------------- |
 | Bin mean  | 0.96  |
 | Non-zero cell proportion  | 0.96  |
+
+
+<a name="binposition"></a>**Bin position**
+The simATACCount object has a bin.coordinate.file parameter, which indicates the address of the file containing bins' chromosome, start and end information. simATAC supports hg19, hg38, mm9, and mm10 bins' position information in its package. However, users can give this parameter as input with the specific format of three columns and the first line header of "chr start end". If this file is not given, and the number of input matrix's bins are different from the bin.coordinate.file, this parameter is set to "None" and the name of bins are not based on the bin position in the format of "chr:start-end". Instead, the bins' names are "BinX" with X the index of bins.
+
+<a name="sparsityfactor"></a>**Sparsity factor**
+simATAC defines a $\gamma$ as the sparsity adjustment factor with a default value of 1, which offers users the flexibility to adjust the sparsity as desired. When $\gamma$ is set to be smaller than 1, the simulated scATAC-seq data tend to be more sparse, and vice versa. This factor can be adjusted by manually setting the sparse.fac parameter. sparse.fac is a factor multiplied to the Poisson distribution lambda before simulating the final counts. Based on our analysis, values of 0.8, 0.9, and 1 are the best values in terms of resembling the bin sparsity of input data. 
 
 [scater]: https://github.com/davismcc/scater
 [SCE]: https://github.com/drisso/SingleCellExperiment

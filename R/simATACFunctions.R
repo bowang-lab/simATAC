@@ -129,6 +129,7 @@ setValidity("simATACCount", function(object) {
               species = checkCharacter(name.list$species, min.len = 1),
               seed = checkInt(name.list$seed),
               default = checkLogical(name.list$default),
+              bin.coordinate.file = checkCharacter(name.list$bin.coordinate.file, min.len = 1),
               lib.mean1 = checkNumber(name.list$lib.mean1, lower = 0),
               lib.mean2 = checkNumber(name.list$lib.mean2, lower = 0),
               lib.sd1 = checkNumber(name.list$lib.sd1, lower = 0),
