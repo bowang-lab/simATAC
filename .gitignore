@@ -2,3 +2,4 @@
 **/._.DS_Store
 .Rproj.user
 .gitignore
+.Rbuildignore
