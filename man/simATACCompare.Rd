@@ -20,9 +20,6 @@ simATACCompare(sim, real, address, name)
 
 \item{name}{Name of the data.}
 }
-\value{
-
-}
 \description{
 Compare the main parameters of simATAC's simulated bin by cell matrix to real
 matrix, including library size, bin mean, non-zero cell proportion, the

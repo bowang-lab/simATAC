@@ -178,78 +178,39 @@ benchmarkCusanovich <- function(version){
   plotFigures(t(c.x.sp13@bmat), cell.c.13, address, name, "Testes", version)
 
   # Merge all cell groups together for cell type clustering analysis (with SnapATAC).
-  # c.x.sp.sim <- c.x.sp
-  # c.x.sp.sim@bmat <- rbind(t(cell.c.1), t(cell.c.2), t(cell.c.3), t(cell.c.4),
-  #                           t(cell.c.5), t(cell.c.6), t(cell.c.7), t(cell.c.8),
-  #                           t(cell.c.9), t(cell.c.10), t(cell.c.11), t(cell.c.12),
-  #                           t(cell.c.13))
-  # c.x.sp.sim@barcode <- unlist(c(c.x.sp1@barcode, c.x.sp2@barcode, c.x.sp3@barcode, c.x.sp4@barcode,
-  #                                c.x.sp5@barcode, c.x.sp6@barcode, c.x.sp7@barcode, c.x.sp8@barcode,
-  #                                c.x.sp9@barcode, c.x.sp10@barcode, c.x.sp11@barcode, c.x.sp12@barcode,
-  #                                c.x.sp13@barcode))
-  # c.x.sp.sim@sample <- unlist(c(c.x.sp1@sample, c.x.sp2@sample, c.x.sp3@sample, c.x.sp4@sample,
-  #                               c.x.sp5@sample, c.x.sp6@sample, c.x.sp7@sample, c.x.sp8@sample,
-  #                               c.x.sp9@sample, c.x.sp10@sample, c.x.sp11@sample, c.x.sp12@sample,
-  #                               c.x.sp13@sample))
-  # c.x.sp.sim@file <- unlist(c(c.x.sp1@file, c.x.sp2@file, c.x.sp3@file, c.x.sp4@file,
-  #                             c.x.sp5@file, c.x.sp6@file, c.x.sp7@file, c.x.sp8@file,
-  #                             c.x.sp9@file, c.x.sp10@file, c.x.sp11@file, c.x.sp12@file,
-  #                             c.x.sp13@file))
-  # c.x.sp.sim@metaData <- rbind(c.x.sp1@metaData, c.x.sp2@metaData, c.x.sp3@metaData, c.x.sp4@metaData,
-  #                              c.x.sp5@metaData, c.x.sp6@metaData, c.x.sp7@metaData, c.x.sp8@metaData,
-  #                              c.x.sp9@metaData, c.x.sp10@metaData, c.x.sp11@metaData, c.x.sp12@metaData,
-  #                              c.x.sp13@metaData)
-  # gc()
-  #
-  # # Cell type clustering with SnapATAC.
-  # # Adjsut the number of reduced dimensions to 5
-  # nmi <- SnapATACClustering(c.x.sp.sim,
-  #                           "mouse",
-  #                           paste(address, "/", name, "/", version, "/", name, "_sim.txt", sep = ""))
-  #
-  # write(paste(name, version, as.character(nmi), sep = "    "),
-  #       file=paste(address, "/", name, "/", name, "_clustering_metric.txt", sep = ""),
-  #       append=TRUE)
-  # print(paste(name, "clustering nmi:", nmi, sep = " "))
+  c.x.sp.sim <- c.x.sp
+  c.x.sp.sim@bmat <- rbind(t(cell.c.1), t(cell.c.2), t(cell.c.3), t(cell.c.4),
+                            t(cell.c.5), t(cell.c.6), t(cell.c.7), t(cell.c.8),
+                            t(cell.c.9), t(cell.c.10), t(cell.c.11), t(cell.c.12),
+                            t(cell.c.13))
+  c.x.sp.sim@barcode <- unlist(c(c.x.sp1@barcode, c.x.sp2@barcode, c.x.sp3@barcode, c.x.sp4@barcode,
+                                 c.x.sp5@barcode, c.x.sp6@barcode, c.x.sp7@barcode, c.x.sp8@barcode,
+                                 c.x.sp9@barcode, c.x.sp10@barcode, c.x.sp11@barcode, c.x.sp12@barcode,
+                                 c.x.sp13@barcode))
+  c.x.sp.sim@sample <- unlist(c(c.x.sp1@sample, c.x.sp2@sample, c.x.sp3@sample, c.x.sp4@sample,
+                                c.x.sp5@sample, c.x.sp6@sample, c.x.sp7@sample, c.x.sp8@sample,
+                                c.x.sp9@sample, c.x.sp10@sample, c.x.sp11@sample, c.x.sp12@sample,
+                                c.x.sp13@sample))
+  c.x.sp.sim@file <- unlist(c(c.x.sp1@file, c.x.sp2@file, c.x.sp3@file, c.x.sp4@file,
+                              c.x.sp5@file, c.x.sp6@file, c.x.sp7@file, c.x.sp8@file,
+                              c.x.sp9@file, c.x.sp10@file, c.x.sp11@file, c.x.sp12@file,
+                              c.x.sp13@file))
+  c.x.sp.sim@metaData <- rbind(c.x.sp1@metaData, c.x.sp2@metaData, c.x.sp3@metaData, c.x.sp4@metaData,
+                               c.x.sp5@metaData, c.x.sp6@metaData, c.x.sp7@metaData, c.x.sp8@metaData,
+                               c.x.sp9@metaData, c.x.sp10@metaData, c.x.sp11@metaData, c.x.sp12@metaData,
+                               c.x.sp13@metaData)
+  gc()
+
+  # Cell type clustering with SnapATAC.
+  # Adjsut the number of reduced dimensions to 5
+  nmi <- SnapATACClustering(c.x.sp.sim,
+                            "mouse",
+                            paste(address, "/", name, "/", version, "/", name, "_sim.txt", sep = ""))
+
+  write(paste(name, version, as.character(nmi), sep = "    "),
+        file=paste(address, "/", name, "/", name, "_clustering_metric.txt", sep = ""),
+        append=TRUE)
+  print(paste(name, "clustering nmi:", nmi, sep = " "))
 
 }
-
-## Cluster real Cusanovich2018 cells with SnapATAC
-# Adjsut the number of reduced dimensions to 10
-# name <- "Cusanovich"
-# address <- "Results"
-# version <- "simATACV1_0"
-# SnapATACClustering(c.x.sp,
-#          "mouse,
-#          paste(address, "/", name, "/", version, "/", name, "_real.txt", sep = ""))
-
-
-# # initial seed: 60760
-# simulateCusanovich("simATACV1_0_0", 0, 0)
-# simulateCusanovich("simATACV1_-0.3_0.3", -0.3, 0.3)
-# simulateCusanovich("simATACV1_-0.4_0.4", -0.4, 0.4)
-#
-# benchmarkCusanovich("simATACV1_0_0")
-# benchmarkCusanovich("simATACV1_-0.3_0.3")
-# benchmarkCusanovich("simATACV1_-0.4_0.4")
-
-
-# # initial seed: 1000
-# simulateCusanovich("simATACV2_0_0", 0, 0)
-# simulateCusanovich("simATACV2_-0.3_0.3", -0.3, 0.3)
-# simulateCusanovich("simATACV2_-0.4_0.4", -0.4, 0.4)
-#
-# benchmarkCusanovich("simATACV2_0_0")
-# benchmarkCusanovich("simATACV2_-0.3_0.3")
-# benchmarkCusanovich("simATACV2_-0.4_0.4")
-
-
-# # initial seed: 10
-# simulateCusanovich("simATACV3_0_0", 0, 0)
-# simulateCusanovich("simATACV3_-0.3_0.3", -0.3, 0.3)
-# simulateCusanovich("simATACV3_-0.4_0.4", -0.4, 0.4)
-#
-# benchmarkCusanovich("simATACV3_0_0")
-# benchmarkCusanovich("simATACV3_-0.3_0.3")
-# benchmarkCusanovich("simATACV3_-0.4_0.4")
 

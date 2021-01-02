@@ -128,78 +128,39 @@ benchmarkPBMC <- function(version){
 
   # Perform benchmarking and plot simulated and real parameters for each cell group.
   plotFigures(t(p.x.sp1@bmat), cell.p.1, address, name, "Cell1", version)
-  # plotFigures(t(p.x.sp2@bmat), cell.p.2, address, name, "Cell2", version)
-  # plotFigures(t(p.x.sp3@bmat), cell.p.3, address, name, "Cell3", version)
-  # plotFigures(t(p.x.sp4@bmat), cell.p.4, address, name, "Cell4", version)
-  # plotFigures(t(p.x.sp5@bmat), cell.p.5, address, name, "Cell5", version)
-  # plotFigures(t(p.x.sp6@bmat), cell.p.6, address, name, "Cell6", version)
-  # plotFigures(t(p.x.sp7@bmat), cell.p.7, address, name, "Cell7", version)
-  # plotFigures(t(p.x.sp8@bmat), cell.p.8, address, name, "Cell8", version)
+  plotFigures(t(p.x.sp2@bmat), cell.p.2, address, name, "Cell2", version)
+  plotFigures(t(p.x.sp3@bmat), cell.p.3, address, name, "Cell3", version)
+  plotFigures(t(p.x.sp4@bmat), cell.p.4, address, name, "Cell4", version)
+  plotFigures(t(p.x.sp5@bmat), cell.p.5, address, name, "Cell5", version)
+  plotFigures(t(p.x.sp6@bmat), cell.p.6, address, name, "Cell6", version)
+  plotFigures(t(p.x.sp7@bmat), cell.p.7, address, name, "Cell7", version)
+  plotFigures(t(p.x.sp8@bmat), cell.p.8, address, name, "Cell8", version)
 
-  # # Perform benchmarking and plot simulated and real parameters for each cell group.
-  # p.x.sp.sim2 <- p.x.sp
-  # p.x.sp.sim2@bmat <- rbind(t(cell.p.1), t(cell.p.2), t(cell.p.3), t(cell.p.4),
-  #                           t(cell.p.5), t(cell.p.6), t(cell.p.7), t(cell.p.8))
-  # p.x.sp.sim2@barcode <- unlist(c(p.x.sp1@barcode, p.x.sp2@barcode, p.x.sp3@barcode, p.x.sp4@barcode,
-  #                                 p.x.sp5@barcode, p.x.sp6@barcode, p.x.sp7@barcode, p.x.sp8@barcode))
-  # p.x.sp.sim2@sample <- unlist(c(p.x.sp1@sample, p.x.sp2@sample, p.x.sp3@sample, p.x.sp4@sample,
-  #                                p.x.sp5@sample, p.x.sp6@sample, p.x.sp7@sample, p.x.sp8@sample))
-  # p.x.sp.sim2@file <- unlist(c(p.x.sp1@file, p.x.sp2@file, p.x.sp3@file, p.x.sp4@file,
-  #                              p.x.sp5@file, p.x.sp6@file, p.x.sp7@file, p.x.sp8@file))
-  # p.x.sp.sim2@metaData <- rbind(p.x.sp1@metaData, p.x.sp2@metaData, p.x.sp3@metaData, p.x.sp4@metaData,
-  #                               p.x.sp5@metaData, p.x.sp6@metaData, p.x.sp7@metaData, p.x.sp8@metaData)
-  # gc()
-  #
-  # # Cell type clustering with SnapATAC.
-  # # Adjsut the number of reduced dimensions to 5
-  # nmi <- SnapATACClustering(p.x.sp.sim2,
-  #                           "human",
-  #                           paste(address, "/", name, "/", version, "/", name, "_sim.txt", sep = ""))
-  #
-  # write(paste(name, version, as.character(nmi), sep = "    "),
-  #       file=paste(address, "/", name, "/", name, "_clustering_metric.txt", sep = ""),
-  #       append=TRUE)
-  # print(paste(name, "clustering nmi:", nmi, sep = " "))
+  # Perform benchmarking and plot simulated and real parameters for each cell group.
+  p.x.sp.sim2 <- p.x.sp
+  p.x.sp.sim2@bmat <- rbind(t(cell.p.1), t(cell.p.2), t(cell.p.3), t(cell.p.4),
+                            t(cell.p.5), t(cell.p.6), t(cell.p.7), t(cell.p.8))
+  p.x.sp.sim2@barcode <- unlist(c(p.x.sp1@barcode, p.x.sp2@barcode, p.x.sp3@barcode, p.x.sp4@barcode,
+                                  p.x.sp5@barcode, p.x.sp6@barcode, p.x.sp7@barcode, p.x.sp8@barcode))
+  p.x.sp.sim2@sample <- unlist(c(p.x.sp1@sample, p.x.sp2@sample, p.x.sp3@sample, p.x.sp4@sample,
+                                 p.x.sp5@sample, p.x.sp6@sample, p.x.sp7@sample, p.x.sp8@sample))
+  p.x.sp.sim2@file <- unlist(c(p.x.sp1@file, p.x.sp2@file, p.x.sp3@file, p.x.sp4@file,
+                               p.x.sp5@file, p.x.sp6@file, p.x.sp7@file, p.x.sp8@file))
+  p.x.sp.sim2@metaData <- rbind(p.x.sp1@metaData, p.x.sp2@metaData, p.x.sp3@metaData, p.x.sp4@metaData,
+                                p.x.sp5@metaData, p.x.sp6@metaData, p.x.sp7@metaData, p.x.sp8@metaData)
+  gc()
+
+  # Cell type clustering with SnapATAC.
+  # Adjsut the number of reduced dimensions to 5
+  nmi <- SnapATACClustering(p.x.sp.sim2,
+                            "human",
+                            paste(address, "/", name, "/", version, "/", name, "_sim.txt", sep = ""))
+
+  write(paste(name, version, as.character(nmi), sep = "    "),
+        file=paste(address, "/", name, "/", name, "_clustering_metric.txt", sep = ""),
+        append=TRUE)
+  print(paste(name, "clustering nmi:", nmi, sep = " "))
 }
 
-
-## Cluster real PBMCs cells with SnapATAC.
-# Adjsut the number of reduced dimensions to 5
-# name <- "PBMCs"
-# address <- "Results"
-# version <- "simATACV1_0"
-# SnapATACClustering(p.x.sp,
-#          "human",
-#          paste(address, "/", name, "/", version, "/", name, "_real.txt", sep = ""))
-
-
-# # initial seed: 60760
-# simulatePBMC("simATACV1_0_0", 0, 0)
-# simulatePBMC("simATACV1_-0.3_0.3", -0.3, 0.3)
-# simulatePBMC("simATACV1_-0.4_0.4", -0.4, 0.4)
-#
-# benchmarkPBMC("simATACV1_0_0")
-# benchmarkPBMC("simATACV1_-0.3_0.3")
-# benchmarkPBMC("simATACV1_-0.4_0.4")
-
-
-# # initial seed: 1000
-# simulatePBMC("simATACV2_0_0", 0, 0)
-# simulatePBMC("simATACV2_-0.3_0.3", -0.3, 0.3)
-# simulatePBMC("simATACV2_-0.4_0.4", -0.4, 0.4)
-#
-# benchmarkPBMC("simATACV2_0_0")
-# benchmarkPBMC("simATACV2_-0.3_0.3")
-# benchmarkPBMC("simATACV2_-0.4_0.4")
-
-
-# # initial seed: 10
-# simulatePBMC("simATACV3_0_0", 0, 0)
-# simulatePBMC("simATACV3_-0.3_0.3", -0.3, 0.3)
-# simulatePBMC("simATACV3_-0.4_0.4", -0.4, 0.4)
-#
-# benchmarkPBMC("simATACV3_0_0")
-# benchmarkPBMC("simATACV3_-0.3_0.3")
-# benchmarkPBMC("simATACV3_-0.4_0.4")
 
 

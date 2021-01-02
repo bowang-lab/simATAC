@@ -1,65 +1,124 @@
-# This function writes the name of peak bins (of real and simATAC generated bin by cell matrices)
-# with the highest averaged read counts to a file with the format of "chrX:start-end" for each bin
-# in a line. There is a Python code (simATAC_analysis_peak_calling2.py) that reads the saved files
-# and extracts the percentage of intersection between the list of peak regions from different sources
-# (bulk peaks, real peak bins, simulated peak bins) for each pair of region list.                                                                                                                                                         peak bins) for each pair of region list.
-# Inputs:
-# orig.count: Original sparse bin by cell matrix.
-# sim.count: Simulated sparse bin by cell matrix.
-# peak.num: Number of peak bins to extract from original and simulated bin by cell matrices.
-# bin.name: The bin names (different for species) with the format of "chrX:start-end" for each bin.
-# name: The name of the benchmark dataset.
-# Output: -
-callPeak <- function(orig.count, sim.count, peak.num, bin.name, name){
+callPeak.new <- function(orig, sim, peak.num, bin.name, name){
 
-  bin.mean.orig <- colSums(orig.count)/nrow(orig.count)
-  bin.mean.sim <- colSums(sim.count)/nrow(sim.count)
-
-  names(bin.mean.orig) <- bin.name
-  names(bin.mean.sim) <- bin.name
+  bin.mean.orig <- colSums(orig)/nrow(orig)
+  bin.mean.sim <- colSums(sim)/nrow(sim)
 
   peak.index.orig <- order(bin.mean.orig, decreasing=TRUE)[1:peak.num]
   peak.index.sim <- order(bin.mean.sim, decreasing=TRUE)[1:peak.num]
 
-  write(names(peak.index.orig), paste(name, "_peaks_real.txt", sep = ""))
-  write(names(peak.index.sim), paste(name, "_peaks_simualted.txt", sep = ""))
+  write(bin.name[peak.index.orig], paste(name, "_peaks_real.txt", sep = ""))
+  write(bin.name[peak.index.sim], paste(name, "_peaks_simualted.txt", sep = ""))
 
+  print(length(intersect(bin.name[peak.index.orig], bin.name[peak.index.sim]))/peak.num)
 }
 
 
-# Read the bin names for human into a list
-human.file = "Benchmarking_Data/Human_genome_coordinates.txt"
-data <- read.table(human.file)
-bin.names.human <- paste(tolower(data$chr), ":", data$start, "-", data$end, sep = "")
 
-# Read the bin names for mouse into a list
-mouse.file = "Benchmarking_Data/Mouse_genome_coordinates.txt"
-data <- read.table(mouse.file)
-bin.names.mouse <- paste(tolower(data$chr), ":", data$start, "-", data$end, sep = "")
+readSim <- function(file, row, col){
 
-# Perform peak calling on benchmarking datasets
-address <- "../Benchmarking_Data"
-version <- "simATACV1_0"
-# Peak calling for Buenrostro2018 simualtion without noise
-
-name <- "Buenrostro2018"
-count <- readSim(paste(address, "/", name, "/", version, "/", name, "_sim_mat.h5", sep = ""),
-                 ncol(b.x.sp@bmat),
-                 nrow(b.x.sp@bmat))
-callPeak(b.x.sp@bmat, t(count), 5000, bin.names.human, "Buenrostro")
+  sum <- h5read(file, "sim")
+  label <- h5read(file, "label")
+  count <- sparseMatrix(i=as.numeric(sum[,1]), j=as.numeric(sum[,2]), x = as.numeric(sum[,3]), dims = c(row, col))
+  rownames(count) <- label
+  return(count)
+}
 
 
-# Peak calling for Cusanovich2018 simualtion without noise
-name <- "Cusanovich2018"
-count <- readSim(paste(address, "/", name, "/", version, "/", name, "_sim_mat.h5", sep = ""),
-                 ncol(c.x.sp@bmat),
-                 nrow(c.x.sp@bmat))
-callPeak(c.x.sp@bmat, t(count), 5000, bin.names.mouse, "Cusanovich")
+extract_peaks <- function (orig, name, version, bin.name, peak.num){
+
+  sim <- readSim(paste("Results/", name, "/", version, "/", name, "_sim_mat.h5", sep = ""),
+                 nrow(orig),
+                 ncol(orig))
+
+  print(dim(orig))
+  print(dim(sim))
+
+  callPeak.new(orig, sim, peak.num, bin.name, version)
+}
 
 
-# Peak calling for PBMCs simualtion without noise
-name <- "PBMCs"
-count <- readSim(paste(address, "/", name, "/", version, "/", name, "_sim_mat.h5", sep = ""),
-                 ncol(p.x.sp@bmat),
-                 nrow(p.x.sp@bmat))
-callPeak(p.x.sp@bmat, t(count), 5000, bin.names.human, "PBMC")
+run_all_version <- function(orig, name, version.name, bin.name, peak.num){
+  extract_peaks(orig, name, paste(version.name, 'V1_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V2_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V3_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V4_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V5_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V6_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V7_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V8_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V9_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V10_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V11_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V12_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V13_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V14_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V15_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V16_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V17_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V18_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V19_0_0_1', sep=''), bin.name, peak.num)
+  extract_peaks(orig, name, paste(version.name, 'V20_0_0_1', sep=''), bin.name, peak.num)
+}
+
+
+
+
+##Buenrostro2018
+
+b.x.sp = createSnap(
+  file="/home/zeinab/Documents/Zeinab/SIMATAC/data/benchmarking/Buenrostro_2018/Buenrostro2018_new.snap",
+  sample="labels",
+  do.par = TRUE,
+  num.cores=1
+)
+b.x.sp = addBmatToSnap(b.x.sp, bin.size=5000)
+
+# Read true cell labels with cell barcodes list.
+metadata <- read.table('/home/zeinab/Documents/Zeinab/SIMATAC/data/benchmarking/Buenrostro_2018/SnapATAC_metadata_Buenrostro_2018.tsv', header = TRUE)
+label <- sapply(tolower(b.x.sp@barcode), function(x) as.character(metadata[which(tolower(metadata$file) == x),]$label))
+b.x.sp@sample <- unlist(label)
+
+# Remove unknown cell group.
+index <- which(b.x.sp@sample != "UNK")
+b.x.sp <- b.x.sp[index,]
+
+
+##call peaks
+name <- 'Buenrostro2018'
+version.name <- 'Buenrostro'
+peak.num = 30000
+run_all_version(b.x.sp@bmat, name, version.name, bin.names.human, peak.num)
+
+
+
+
+##Cusanovich2018
+c.x.sp = createSnap(
+  file="/home/zeinab/Documents/Zeinab/SIMATAC/data/benchmarking/Cusanovich_2018_subset/Cusanovich2018_new.snap",
+  sample="labels",
+  num.cores=1
+)
+c.x.sp = addBmatToSnap(c.x.sp, bin.size=5000)
+
+##call peaks
+name <- 'Cusanovich2018'
+version.name <- 'Cusanovich'
+peak.num = 30000
+run_all_version(c.x.sp@bmat, name, version.name, bin.names.mouse, peak.num)
+
+
+
+
+##PBMCs
+p.x.sp = createSnap(
+  file="/home/zeinab/Documents/Zeinab/SIMATAC/data/benchmarking/10x_PBMC_5k/PBMCs_new.snap",
+  sample="labels",
+  num.cores=1
+)
+p.x.sp = addBmatToSnap(p.x.sp, bin.size=5000)
+
+##call peaks
+name <- 'PBMCs'
+version.name <- 'PBMCs'
+peak.num = 30000
+run_all_version(p.x.sp@bmat, name, version.name, bin.names.human, peak.num)

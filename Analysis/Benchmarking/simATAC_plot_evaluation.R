@@ -177,6 +177,30 @@ plotParams <- function(orig.count, sim.count, address, name, type, version){
   dev.off()
 
 
+  sx <- sort(orig.bin.sparsity); sy <- sort(sim.bin.sparsity)
+  lenx <- length(sx)
+  leny <- length(sy)
+  if (leny < lenx)sx <- approx(1L:lenx, sx, n = leny)$y
+  if (leny > lenx)sy <- approx(1L:leny, sy, n = lenx)$y
+  df <- data.frame(orig = sx, sim = sy)
+  p <- ggplot(df, aes(x = orig, y = sim)) +
+    geom_point(color = "darkblue") +
+    ggtitle(plot.title) +
+    xlab("Real bin sparsity") +
+    ylab("Simulated bin sparsity") +
+    theme_bw() +
+    theme(
+      plot.title = element_text(size=24, face="bold.italic", hjust = 0.5),
+      axis.title.x = element_text(size=24, face="bold"),
+      axis.title.y = element_text(size=24, face="bold"),
+      axis.text.x = element_text(size = 24),
+      axis.text.y = element_text(size = 24)
+    )
+  png(paste(address, "/", name, "/", version, "/", name, "_", type, "_", version, "_BinSparsityQQ.png", sep = ""))
+  print(p + geom_abline(intercept = 0, slope = 1, col = "black"))
+  dev.off()
+
+
   orig.cell.sparsity.df <- data.frame(group = "Real", value = orig.cell.sparsity)
   sim.cell.sparsity.df <- data.frame(group = "Simulated", value =sim.cell.sparsity)
 
@@ -377,7 +401,7 @@ SnapATACClustering <- function(x.sp, species, label.file){
     input.mat="bmat",
     num.eigs=30
   )
-  
+
   # Graph-based clustering
   x.sp = runKNN(
     obj=x.sp,

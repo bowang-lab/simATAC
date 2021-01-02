@@ -9,15 +9,12 @@
 # simulations without Gaussian noise (mean:0, sd:0).
 # Input:
 # name: The name of the dataset ("Buenrostro2018", "Cusanovich2018", "PBMCs").
+# version: The version of the input simulation.
 # Output: -
-analyze_correlation <- function(name){
+analyze_correlation <- function(name, version){
 
-  data <- read.table(paste("Results/", name, "/", name, "_correlation.txt", sep = ""), header = FALSE, dec = ".")
-  # returns correlation parameters only for simulation runs with simulation version equal to
-  # "simATACV1_0_0", or "simATACV2_0_0", "simATACV3_0_0".
-  data <- data[which("simATACV1_0_0" == data$V2 |
-                       "simATACV2_0_0" == data$V2 |
-                       "simATACV3_0_0" == data$V2),]
+  data <- read.table(paste("/Users/zeinab/mnt/a5/simATAC_revision/", name, "/", name, "_correlation_revision.txt", sep = ""), header = FALSE, dec = ".")
+  data <- data[grep(version, data$V2),]
 
   # get all existing cell type or cell lable in the dataset and report the average of
   # correlation for each cell type separately.
@@ -27,12 +24,7 @@ analyze_correlation <- function(name){
     print(paste(t,
                 round(mean(data[which(data$V1 == t & data$V3 == "BinMeanPearCor<0.8"),]$V4), 2),
                 round(mean(data[which(data$V1 == t & data$V3 == "NZeroPropPearCor"),]$V4), 2)
-               )
-        )
+    )
+    )
   }
-
 }
-
-analyze_correlation("Buenrostro2018")
-analyze_correlation("Cusanovich2018")
-analyze_correlation("PBMCs")

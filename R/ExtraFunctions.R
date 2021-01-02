@@ -265,8 +265,6 @@ simATACgetCellByRegion <- function(sim, file.bed){
 #' @param address Folder address to save plots.
 #' @param name Name of the data.
 #'
-#' @return
-#'
 #' @importFrom ggpubr ggboxplot 
 #' @importFrom ggplot2 ggplot ggtitle geom_point theme theme_bw xlab ylab element_blank element_text ylim xlim aes
 #' @importFrom grDevices png dev.off
