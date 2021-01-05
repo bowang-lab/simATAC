@@ -25,6 +25,6 @@ simATAC tutorial provides examples and explanations of its functions and how to 
 
 Report bugs and provide suggestions by sending email to:
 
-Author and maintainer: Zeinab Navidi Ghaziani (zeinab.nvd@gmail.com)
+Author and maintainer: Zeinab Navidi (zeinab.nvd@gmail.com)
 
 Or open a new issue on this Github page.
