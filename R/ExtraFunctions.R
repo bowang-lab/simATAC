@@ -179,7 +179,7 @@ simATACgetBinary <- function(sim){
 #' @importFrom Matrix rowSums
 #' @export
 #'
-simATACgetCellByPeak <- function(sim, peak.num = 5000){
+simATACgetPeakByCell <- function(sim, peak.num = 5000){
 
   bin.mean <- rowSums(BiocGenerics::counts(sim))/ ncol(BiocGenerics::counts(sim))
   peak.index <- order(bin.mean, decreasing=TRUE)[1:peak.num]
@@ -233,7 +233,7 @@ getBin <- function(region, bin.name){
 #'
 #' @export
 #'
-simATACgetCellByRegion <- function(sim, file.bed){
+simATACgetFeatureByCell <- function(sim, file.bed){
 
   bin.name <- rownames(BiocGenerics::counts(sim))
 

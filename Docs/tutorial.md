@@ -528,18 +528,18 @@ simATAC offers converting the simulated bin by cell matrix to other versions of 
 [1] 642098   1000
 ```
 
-We can also extract the peak by cell matrix for the desired number of peak bins. Given the simulated SCE object and the number of peak bins, the simATACgetCellByPeak() function returns a sparse peak by cell matrix. The rows hold the bins having the highest bin means averaging across all simulated cells.
+We can also extract the peak by cell matrix for the desired number of peak bins. Given the simulated SCE object and the number of peak bins, the simATACgetPeakByCell() function returns a sparse peak by cell matrix. The rows hold the bins having the highest bin means averaging across all simulated cells.
 
 ```bash
-> peak.count <- simATACgetCellByPeak(sim, peak.num = 5000)
+> peak.count <- simATACgetPeakByCell(sim, peak.num = 5000)
 > dim(peak.count)
 [1] 5000 1000
 ```
 
-simATAC offers the simATACgetCellByRegion() function, which returns a feature matrix extracted from the simulated bin by cell array. Features can be any list of genome regions given as a BED file.
+simATAC offers the simATACgetFeatureByCell() function, which returns a feature matrix extracted from the simulated bin by cell array. Features can be any list of genome regions given as a BED file.
 
 ```bash
-> peak.count <- simATACgetCellByRegion(sim, file.bed = "example.bed")
+> peak.count <- simATACgetFeatureByCell(sim, file.bed = "example.bed")
 ```
 
 
